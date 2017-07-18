@@ -1,0 +1,39 @@
+{
+  "brand":      "Zaměstnanecké fórum",
+  "leftLinks":  [
+  ],
+  "rightLinks": [
+    {
+      "label":      "Registrovat",
+      "link":       "/registrovat",
+      "view":       "registrovat",
+      "isRouteBtn": true,
+      "isAuthenticated": false,
+      "role": null
+    },
+    {
+      "label":      "Přihlásit",
+      "link":       "/prihlasit",
+      "view":       "prihlasit",
+      "isRouteBtn": true,
+      "isAuthenticated": false,
+      "role": null
+    },
+    {
+      "label":      "Hlavní stránka",
+      "link":       "/hlavni-stranka",
+      "view":       "hlavni-stranka",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "employee"
+    },
+    {
+      "label":      "Odhlásit",
+      "link":       "/odhlaseni",
+      "view":       "odhlaseni",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": null
+    }
+  ]
+}
