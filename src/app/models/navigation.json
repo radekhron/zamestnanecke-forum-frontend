@@ -28,6 +28,22 @@
       "role": "employee"
     },
     {
+      "label":      "Seznam uživatelů",
+      "link":       "/admin/uzivatele/seznam",
+      "view":       "seznam-uzivatelu",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
+      "label":      "Seznam šablon",
+      "link":       "/admin/sablony/seznam",
+      "view":       "seznam-sablon",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
       "label":      "Odhlásit",
       "link":       "/odhlaseni",
       "view":       "odhlaseni",

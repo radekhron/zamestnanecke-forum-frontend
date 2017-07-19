@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 
 // /////////////////////
@@ -7,7 +8,7 @@ import axios from 'axios';
 const FETCH_USER_DETAIL_REQUEST  = 'FETCH_USER_DETAIL_REQUEST';
 const FETCH_USER_DETAIL_SUCCESS  = 'FETCH_USER_DETAIL_SUCCESS';
 const FETCH_USER_DETAIL_FAILURE  = 'FETCH_USER_DETAIL_FAILURE';
-const CHANGE_EMPLOYMENT_CONFIRMATION  = 'CHANGE_EMPLOYMENT_CONFIRMATION';
+const CHANGE_FORM_VALUE  = 'CHANGE_FORM_VALUE';
 
 // /////////////////////
 // reducer
@@ -38,9 +39,8 @@ export default function (state = initialState, action) {
         userDetail: null,
         errorMessage: action.errorMessage
       })
-    case CHANGE_EMPLOYMENT_CONFIRMATION:
-      let newUserDetail = Object.assign({},state.userDetail);
-      newUserDetail[action.target] = action.newValue;
+    case CHANGE_FORM_VALUE:
+      let newUserDetail = _.set(Object.assign({},state.userDetail),action.target,action.newValue);
       return Object.assign({},state,{
         isFetching:  false,
         userDetail: newUserDetail,
@@ -70,6 +70,6 @@ export function fetchUserDetail(userID) {
 
 export function employmentConfirmationChangeAction(value, target) {
   return dispatch => {
-    dispatch({type: CHANGE_EMPLOYMENT_CONFIRMATION, newValue: value, target: target});
+    dispatch({type: CHANGE_FORM_VALUE, newValue: value, target: target});
   }
 }

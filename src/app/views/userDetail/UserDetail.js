@@ -14,7 +14,8 @@ class UserList extends Component {
     super(props);
 
     // This binding is necessary to make `this` work in the callback
-    this.handleEmploymentConfirmationChange = this.handleEmploymentConfirmationChange.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   componentDidMount() {
@@ -22,10 +23,13 @@ class UserList extends Component {
     fetchUserDetail(this.props.match.params.userID);
   }
 
-  handleEmploymentConfirmationChange(event) {
-    console.log(event.target.name);
+  handleFormChange(event) {
     let { employmentConfirmationChangeAction } = this.props;
     employmentConfirmationChangeAction(event.target.value,event.target.name);
+  }
+
+  handleBackClick(event) {
+    this.props.history.goBack()
   }
 
   render() {
@@ -34,6 +38,9 @@ class UserList extends Component {
 
     return(
       <div className="col-md-12">
+        <div className="col-md-6 col-md-offset-3">
+          <button className="btn btn-default btn-lg btn-block" onClick={this.handleBackClick}>Zpět</button>
+        </div>
         {errorMessage &&
           <ErrorBox
             errorMessage={errorMessage}
@@ -71,11 +78,22 @@ class UserList extends Component {
               </div>
               <div className="col-md-4 text-center">
                 Ověřili jsme zaměstnání<br/>
-                <select name="data.employmentConfirmed" ref="data.employmentConfirmed" value={userDetail.data.employmentConfirmed.toString()} onChange={this.handleEmploymentConfirmationChange}>
+                <select name="data.employmentConfirmed" ref="data.employmentConfirmed" value={userDetail.data.employmentConfirmed.toString()} onChange={this.handleFormChange}>
                   <option value="true">Ano</option>
                   <option value="false">Ne</option>
                 </select>
               </div>
+              <p><a href="mailto:{userDetail.personalInformation.email}">{userDetail.personalInformation.email}</a></p>
+              <p>{userDetail.personalInformation.phone}</p>
+              <p>Opt-out:
+                {userDetail.personalInformation.optOut === true &&
+                  <span className="label label-danger">Ano</span>
+                }
+                {userDetail.personalInformation.optOut === false &&
+                  <span className="label label-success">Ne</span>
+                }
+              </p>
+              <button className="btn btn-info btn-lg btn-block" onClick={this.handleBackClick}>Uložit</button>
               <pre>{JSON.stringify(userDetail, null, 2)}</pre>
             </div>
           </div>

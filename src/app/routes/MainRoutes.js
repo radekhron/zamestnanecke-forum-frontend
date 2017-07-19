@@ -12,7 +12,9 @@ import {
   ConnectedRegister,
   ConnectedLogin,
   ConnectedUserList,
-  ConnectedUserDetail
+  ConnectedUserDetail,
+  ConnectedIssueList,
+  ConnectedIssueEdit
 }                               from '../containers';
 import {
   PageNotFound,
@@ -29,6 +31,9 @@ const MainRoutes = () => {
       <Route path="/registrovat/:companyID" component={ConnectedRegister} />
       <Route path="/admin/uzivatele/seznam" component={ConnectedUserList} />
       <Route path="/admin/uzivatele/:userID" component={ConnectedUserDetail} />
+      <Route path="/admin/sablony/seznam" component={ConnectedIssueList} />
+      <Route path="/admin/sablony/vytvorit" component={ConnectedIssueEdit} />
+      <Route path="/admin/sablony/:issueID" component={ConnectedIssueEdit} />
       <Route path="*" component={PageNotFound} />
     </Switch>
   );

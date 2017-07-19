@@ -9,6 +9,8 @@ import Login from './login/Login.js';
 import Logout from './logout/Logout.js';
 import UserList from './userList/UserList.js';
 import UserDetail from './userDetail/UserDetail.js';
+import IssueList from './issueList/IssueList.js';
+import IssueEdit from './issueEdit/IssueEdit.js';
 
 export {
   About,
@@ -19,5 +21,7 @@ export {
   Login,
   Logout,
   UserList,
-  UserDetail
+  UserDetail,
+  IssueList,
+  IssueEdit
 };

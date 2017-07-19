@@ -8,6 +8,8 @@ import ConnectedRegister    from './register/Register';
 import ConnectedLogin       from './login/Login.js';
 import ConnectedUserList    from './userList/UserList';
 import ConnectedUserDetail    from './userDetail/UserDetail';
+import ConnectedIssueList    from './issueList/IssueList';
+import ConnectedIssueEdit    from './issueEdit/IssueEdit';
 
 
 export {
@@ -18,6 +20,8 @@ export {
   ConnectedRegister,
   ConnectedLogin,
   ConnectedUserList,
-  ConnectedUserDetail
+  ConnectedUserDetail,
+  ConnectedIssueList,
+  ConnectedIssueEdit
 
 };

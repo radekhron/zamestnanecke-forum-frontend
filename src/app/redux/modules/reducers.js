@@ -9,6 +9,8 @@ import register             from './register';
 import login             from './login';
 import userList from './userList';
 import userDetail from './userDetail';
+import objectList from './objectList';
+import issueEdit from './issueEdit';
 
 
 export const reducers = {
@@ -18,7 +20,9 @@ export const reducers = {
   register,
   login,
   userList,
-  userDetail
+  userDetail,
+  objectList,
+  issueEdit
 };
 
 export default combineReducers({
