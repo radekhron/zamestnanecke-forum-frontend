@@ -44,6 +44,14 @@
       "role": "admin"
     },
     {
+      "label":      "Seznam témat",
+      "link":       "/admin/temata/seznam",
+      "view":       "seznam-temat",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
       "label":      "Odhlásit",
       "link":       "/odhlaseni",
       "view":       "odhlaseni",

@@ -11,6 +11,8 @@ import UserList from './userList/UserList.js';
 import UserDetail from './userDetail/UserDetail.js';
 import IssueList from './issueList/IssueList.js';
 import IssueEdit from './issueEdit/IssueEdit.js';
+import ThemeList from './themeList/ThemeList.js';
+import ThemeEdit from './themeEdit/ThemeEdit.js';
 
 export {
   About,
@@ -23,5 +25,7 @@ export {
   UserList,
   UserDetail,
   IssueList,
-  IssueEdit
+  IssueEdit,
+  ThemeList,
+  ThemeEdit
 };

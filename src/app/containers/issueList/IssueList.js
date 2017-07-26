@@ -16,7 +16,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      fetchIssueList: objectListActions.fetchIssueList
+      fetchIssueList: objectListActions.fetchIssueList,
+      resetList: objectListActions.resetList
     },
     dispatch
   );

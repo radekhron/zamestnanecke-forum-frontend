@@ -14,7 +14,9 @@ import {
   ConnectedUserList,
   ConnectedUserDetail,
   ConnectedIssueList,
-  ConnectedIssueEdit
+  ConnectedIssueEdit,
+  ConnectedThemeList,
+  ConnectedThemeEdit
 }                               from '../containers';
 import {
   PageNotFound,
@@ -34,6 +36,9 @@ const MainRoutes = () => {
       <Route path="/admin/sablony/seznam" component={ConnectedIssueList} />
       <Route path="/admin/sablony/vytvorit" component={ConnectedIssueEdit} />
       <Route path="/admin/sablony/:issueID" component={ConnectedIssueEdit} />
+      <Route path="/admin/temata/seznam" component={ConnectedThemeList} />
+      <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
+      <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
       <Route path="*" component={PageNotFound} />
     </Switch>
   );

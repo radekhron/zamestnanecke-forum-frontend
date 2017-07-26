@@ -1,9 +1,10 @@
 // @flow weak
 
 export const appConfig = {
-  DEV_MODE: true, // flag to fetch mock or real fetch
-
-  api: {
-    fakeEndPoint: 'api/somewhere'
-  }
+  api: (process.env.ENV === 'production' ? {
+    serverUrl: "https://myserver.com"
+  } : {
+    serverUrl: "http://localhost:8888"
+  }),
+  apiVersion: '/api/v1'
 };

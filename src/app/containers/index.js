@@ -10,6 +10,8 @@ import ConnectedUserList    from './userList/UserList';
 import ConnectedUserDetail    from './userDetail/UserDetail';
 import ConnectedIssueList    from './issueList/IssueList';
 import ConnectedIssueEdit    from './issueEdit/IssueEdit';
+import ConnectedThemeList    from './themeList/ThemeList';
+import ConnectedThemeEdit    from './themeEdit/ThemeEdit';
 
 
 export {
@@ -22,6 +24,8 @@ export {
   ConnectedUserList,
   ConnectedUserDetail,
   ConnectedIssueList,
-  ConnectedIssueEdit
+  ConnectedIssueEdit,
+  ConnectedThemeList,
+  ConnectedThemeEdit
 
 };

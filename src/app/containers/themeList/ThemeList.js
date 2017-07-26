@@ -2,23 +2,22 @@
 
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { IssueEdit }               from '../../views';
-import * as objectEditActions      from '../../redux/modules/objectEdit';
+import { ThemeList }               from '../../views';
+import * as objectListActions      from '../../redux/modules/objectList';
+
 
 
 const mapStateToProps = (state) => {
   return {
-    data: state.formData.issue,
-    editationState: state.objectEdit
+    objectList: state.objectList
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      fetchObjectDetailAndUpdateFormModel: objectEditActions.fetchObjectDetailAndUpdateFormModel,
-      resetModelDetail: objectEditActions.resetModelDetail,
-      postObjectForCreateOrUpdate: objectEditActions.postObjectForCreateOrUpdate
+      fetchThemeList: objectListActions.fetchThemeList,
+      resetList: objectListActions.resetList
     },
     dispatch
   );
@@ -37,4 +36,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(IssueEdit);
+)(ThemeList);

@@ -58,3 +58,23 @@ export function fetchIssueList() {
     .catch(err => dispatch({type: FETCH_LIST_FAILURE, errorMessage: err.response.data}));
   }
 }
+
+export function fetchThemeList() {
+  return dispatch => {
+    dispatch({type: FETCH_LIST_REQUEST});
+    const url = 'http://localhost:8888/api/v1/admin/theme/list';
+    axios({
+      method: 'get',
+      url: url,
+      headers: {'Content-Type': 'application/json', 'x-access-token': localStorage.getItem('jwt') ? localStorage.getItem('jwt') : null},
+    })
+    .then(data => dispatch({type: FETCH_LIST_SUCCESS, list: data.data}))
+    .catch(err => dispatch({type: FETCH_LIST_FAILURE, errorMessage: err.response.data}));
+  }
+}
+
+export function resetList() {
+  return dispatch => {
+    dispatch({type: FETCH_LIST_SUCCESS, list: []});
+  }
+}

@@ -7,11 +7,11 @@ import PropTypes      from 'prop-types';
 import {ErrorBox, LoadingBox} from '../../components';
 import { Link }       from 'react-router-dom';
 
-class IssueList extends Component {
+class ThemeList extends Component {
 
   componentDidMount() {
-    const { fetchIssueList } = this.props;
-    fetchIssueList();
+    const { fetchThemeList } = this.props;
+    fetchThemeList();
   }
 
   componentWillUnmount() {
@@ -20,13 +20,14 @@ class IssueList extends Component {
   }
 
 
+
   render() {
     const { objectList } = this.props;
     const {isFetching, list, errorMessage} = objectList;
     return(
       <div className="col-md-12">
         <div className="col-md-6 col-md-offset-3 text-center">
-          <h1>Seznam šablon</h1>
+          <h1>Seznam témat</h1>
         </div>
         {errorMessage &&
           <ErrorBox
@@ -39,22 +40,25 @@ class IssueList extends Component {
         <div className="col-md-6 col-md-offset-3 well">
           <Link
             className="btn btn-info btn-lg btn-block"
-            to={'/admin/sablony/vytvorit'}>
-            Vytvořit novou šablonu
+            to={'/admin/temata/vytvorit'}>
+            Vytvořit nové téma
           </Link>
         </div>
-        {list.map((object) =>
-          <div className="col-md-4" key={object._id}>
-            <div className="well">
-              <pre>{JSON.stringify(object, null, 2)}</pre>
-              <Link
-                className="btn btn-info btn-lg btn-block"
-                to={'/admin/sablony/'+object._id}>
-                Upravit
-              </Link>
+        <div className="col-md-12">
+          {list.map((object) =>
+            <div className="col-md-4" key={object._id}>
+              <div className="well">
+                <pre>{JSON.stringify(object, null, 2)}</pre>
+                <Link
+                  className="btn btn-info btn-lg btn-block"
+                  to={'/admin/temata/'+object._id}>
+                  Upravit
+                </Link>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+
 
         <div className="col-md-12">
           <pre>{JSON.stringify(this.props, null, 2)}</pre>
@@ -67,8 +71,8 @@ class IssueList extends Component {
 
 }
 
-IssueList.propTypes = {
-  fetchIssueList: PropTypes.func.isRequired,
+ThemeList.propTypes = {
+  fetchThemeList: PropTypes.func.isRequired,
 }
 
-export default IssueList;
+export default ThemeList;
