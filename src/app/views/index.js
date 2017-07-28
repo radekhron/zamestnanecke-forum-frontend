@@ -13,6 +13,7 @@ import IssueList from './issueList/IssueList.js';
 import IssueEdit from './issueEdit/IssueEdit.js';
 import ThemeList from './themeList/ThemeList.js';
 import ThemeEdit from './themeEdit/ThemeEdit.js';
+import EmployeeHome from './employeeHome/EmployeeHome.js';
 
 export {
   About,
@@ -27,5 +28,6 @@ export {
   IssueList,
   IssueEdit,
   ThemeList,
-  ThemeEdit
+  ThemeEdit,
+  EmployeeHome
 };

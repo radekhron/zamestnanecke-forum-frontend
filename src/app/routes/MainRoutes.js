@@ -16,7 +16,8 @@ import {
   ConnectedIssueList,
   ConnectedIssueEdit,
   ConnectedThemeList,
-  ConnectedThemeEdit
+  ConnectedThemeEdit,
+  ConnectedEmployeeHome
 }                               from '../containers';
 import {
   PageNotFound,
@@ -31,6 +32,7 @@ const MainRoutes = () => {
       <Route path="/prihlasit" component={ConnectedLogin} />
       <Route path="/odhlaseni" component={Logout} />
       <Route path="/registrovat/:companyID" component={ConnectedRegister} />
+      <Route path="/registrovat" component={ConnectedRegister} />
       <Route path="/admin/uzivatele/seznam" component={ConnectedUserList} />
       <Route path="/admin/uzivatele/:userID" component={ConnectedUserDetail} />
       <Route path="/admin/sablony/seznam" component={ConnectedIssueList} />
@@ -39,6 +41,7 @@ const MainRoutes = () => {
       <Route path="/admin/temata/seznam" component={ConnectedThemeList} />
       <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
       <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
+      <Route path="/hlavni-stranka" component={ConnectedEmployeeHome} />
       <Route path="*" component={PageNotFound} />
     </Switch>
   );

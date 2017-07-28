@@ -7,6 +7,7 @@ import PropTypes      from 'prop-types';
 import {ErrorBox, LoadingBox} from '../../components';
 import { Link }       from 'react-router-dom';
 import { Control, Form, Errors, actions } from 'react-redux-form';
+import _ from 'lodash';
 
 class ThemeEdit extends Component {
 
@@ -102,7 +103,7 @@ class ThemeEdit extends Component {
                   validateOn="blur"
                   >
                   <option value="" disabled>Vyberte šablonu</option>
-                  {this.props.issueList.list.map((issue) => <option value={issue._id} key={issue._id}>{issue.name}</option>)}
+                  {_.filter(this.props.issueList.list,{'state': 'Active'}).map((issue) => <option value={issue._id} key={issue._id}>{issue.name}</option>)}
                 </Control.select>
                 <Errors
                   className="has-error"

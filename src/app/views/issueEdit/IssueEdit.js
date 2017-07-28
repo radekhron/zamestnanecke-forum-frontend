@@ -72,6 +72,59 @@ class IssueEdit extends Component {
                   }}
                 />
               </div>
+              <div className="form-group">
+                <label htmlFor=".description" className="form-label">Detail šablony:</label>
+                <Control.textarea
+                  model=".description"
+                  required
+                  id="theme.description"
+                  validateOn={["blur","change"]}
+                  className="form-control"
+                />
+                <Errors
+                  className="has-error"
+                  component={(props) => <span className="help-block">{props.children}</span>}
+                  model=".description"
+                  messages={{
+                    valueMissing: 'Tato položka je povinná'
+                  }}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor=".state" className="form-label">Stav:</label>
+                <Control.select model=".state" required className="form-control">
+                  <option value="" disabled>Vyberte stav</option>
+                  <option value="Draft">Návrh</option>
+                  <option value="Active">Aktivní šablona</option>
+                  <option value="Suspended">Neaktivní šablona</option>
+                </Control.select>
+              </div>
+              <div className="form-group">
+                <label htmlFor=".default" className="form-label">Automatická šablona při aktivaci firmy:</label>
+                <Control.select model=".default" required className="form-control">
+                  <option value={true}>Ano</option>
+                  <option value={false}>Ne</option>
+                </Control.select>
+              </div>
+              <div className="form-group">
+                <label htmlFor=".defaultForSpecificNACE" className="form-label">Šablona automaticky spouštěná při aktivaci firmy se specifickým NACE:</label>
+                <Control.text
+                  model=".defaultForSpecificNACE"
+                  className="form-control"
+                />
+              </div>
+              {!isPosting &&
+                <div className="form-group">
+                  <button type="submit" className="btn btn-default btn-lg btn-block">
+                    {this.props.match.path === '/admin/sablony/vytvorit' && <span>Vytvořit </span>}
+                    {this.props.match.path != '/admin/sablony/vytvorit' && <span>Upravit </span>}
+                     šablonu
+                  </button>
+                </div>
+              }
+              {isPosting &&
+                <LoadingBox/>
+              }
               <pre>{JSON.stringify(this.props.data, null, 2)}</pre>
             </Form>
           </div>

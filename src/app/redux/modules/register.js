@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { actions } from 'react-redux-form'
+
 
 
 // /////////////////////
@@ -16,10 +18,9 @@ const POST_EMPLOYEE_REGISTRATION_FAILURE  = 'POST_EMPLOYEE_REGISTRATION_FAILURE'
 // /////////////////////
 const initialState = {
   isFetching:  false,
-  isPostingRegistration: false,
-  company:    null,
+  isPosting: false,
   employeeRegistered: false,
-  errorMessage: {}
+  errorMessage: ''
 };
 
 export default function (state = initialState, action) {
@@ -27,43 +28,38 @@ export default function (state = initialState, action) {
     case FETCH_COMPANY_DETAILS_REQUEST:
       return Object.assign({},state,{
         isFetching: true,
-        isPostingRegistration: false,
-        company: null,
+        isPosting: false,
         employeeRegistered: false,
-        errorMessage: {}
+        errorMessage: ''
       })
     case FETCH_COMPANY_DETAILS_SUCCESS:
       return Object.assign({},state,{
         isFetching: false,
-        isPostingRegistration: false,
-        company: action.company,
+        isPosting: false,
         employeeRegistered: false,
-        errorMessage: {}
+        errorMessage: ''
       })
     case FETCH_COMPANY_DETAILS_FAILURE:
     case POST_EMPLOYEE_REGISTRATION_FAILURE:
       return Object.assign({},state,{
         isFetching:  false,
-        isPostingRegistration: false,
-        company: null,
+        isPosting: false,
         employeeRegistered: false,
         errorMessage: action.errorMessage
       })
     case POST_EMPLOYEE_REGISTRATION_REQUEST:
       return Object.assign({},state,{
         isFetching:  false,
-        isPostingRegistration: true,
-        company: state.company,
+        isPosting: true,
         employeeRegistered: false,
-        errorMessage: {}
+        errorMessage: ''
       })
       case POST_EMPLOYEE_REGISTRATION_SUCCESS:
         return Object.assign({},state,{
           isFetching:  false,
-          isPostingRegistration: false,
-          company: state.company,
+          isPosting: false,
           employeeRegistered: true,
-          errorMessage: {}
+          errorMessage: ''
         })
     default:
       return state
@@ -81,7 +77,11 @@ export function fetchCompanyDetails(companyID) {
       method: 'get',
       url: url
     })
-    .then(data => dispatch({type: FETCH_COMPANY_DETAILS_SUCCESS, company: data.data}))
+    .then(data => {
+      dispatch({type: FETCH_COMPANY_DETAILS_SUCCESS})
+      dispatch(actions.reset('formData.register'))
+      dispatch(actions.merge('formData.register',{company: data.data}))
+    })
     .catch(err => dispatch({type: FETCH_COMPANY_DETAILS_FAILURE, errorMessage: err.response.data}));
   }
 }

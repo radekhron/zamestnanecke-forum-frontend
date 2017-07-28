@@ -38,16 +38,27 @@ const initialThemeState = {
 const initialIssueState = {
   name: '',
   description: '',
-  state: 'In buffer',
-  default: false,
+  state: 'Draft',
+  default: 'false',
   defaultForSpecificNACE: ''
+}
+
+const initialRegisterState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  emailConfirmation: '',
+  phone: '',
+  password: '',
+  passwordConfirmation: ''
 }
 
 export default combineReducers({
   ...reducers,
   formData: combineForms({
     theme: initialThemeState,
-    issue: initialIssueState
+    issue: initialIssueState,
+    register: initialRegisterState
   }, 'formData'),
   routing: routerReducer
 });

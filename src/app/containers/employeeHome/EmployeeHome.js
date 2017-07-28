@@ -2,26 +2,23 @@
 
 import { connect }            from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Register }               from '../../views';
-import * as registerActions      from '../../redux/modules/register';
-import * as companyLookupActions      from '../../redux/modules/companySearch';
+import { EmployeeHome }               from '../../views';
+import * as objectEditActions      from '../../redux/modules/objectEdit';
 
 
 
 const mapStateToProps = (state) => {
   return {
-    registerForm: state.formData.register,
-    registerState: state.register,
-    companyLookup: state.companySearch
+    homepage: state.objectEdit
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      fetchCompanyDetails: registerActions.fetchCompanyDetails,
-      postEmployeeRegistration: registerActions.postEmployeeRegistration,
-      searchCompanies: companyLookupActions.searchCompanies
+      fetchObjectDetail: objectEditActions.fetchObjectDetail,
+      postEmploymentConfirmationUrl: objectEditActions.postEmploymentConfirmationUrl,
+      deleteEmploymentConfirmation: objectEditActions.deleteEmploymentConfirmation
     },
     dispatch
   );
@@ -40,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Register);
+)(EmployeeHome);
