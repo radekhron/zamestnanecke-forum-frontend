@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { actions } from 'react-redux-form'
+import _ from 'lodash'
 
 
 
@@ -86,7 +87,7 @@ export function fetchCompanyDetails(companyID) {
   }
 }
 
-export function postEmployeeRegistration(employee) {
+export function postEmployeeRegistration(employee, history) {
   return dispatch => {
     dispatch({type: POST_EMPLOYEE_REGISTRATION_REQUEST});
     const url = 'http://localhost:8888/api/v1/employee/register';
@@ -94,11 +95,25 @@ export function postEmployeeRegistration(employee) {
       method: 'post',
       url: url,
       headers: {'Content-Type': 'application/json'},
-      data: employee
+      data: {
+        employee: {
+          personalInformation: {
+            firstName: employee.firstName,
+            lastName: employee.lastName,
+            email: employee.email,
+            phone: employee.phone,
+          },
+          company: {
+            companyID: employee.company.companyID,
+          },
+          password: employee.password
+        }
+      }
     })
     .then(data => {
       dispatch({type: POST_EMPLOYEE_REGISTRATION_SUCCESS});
+      history.push('/prihlasit');
     })
-    .catch(err => dispatch({type: POST_EMPLOYEE_REGISTRATION_FAILURE, errorMessage: err}));
+    .catch(err => dispatch({type: POST_EMPLOYEE_REGISTRATION_FAILURE, errorMessage: _.get(err, 'response.data') }));
   }
 }

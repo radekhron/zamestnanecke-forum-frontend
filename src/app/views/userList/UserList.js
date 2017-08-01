@@ -34,7 +34,7 @@ class UserList extends Component {
             <div className="well">
               <h3>{user.id}</h3>
               <p><strong>{user.personalInformation.firstName} {user.personalInformation.lastName}</strong></p>
-              <p>Firma: {user.company.companyName}</p>
+              <p>Firma: {user.company.name}</p>
               <p>IČO: {user.company.companyID}</p>
               <p>Role: {user.data.role}</p>
               <p>Stav: {user.data.state}</p>

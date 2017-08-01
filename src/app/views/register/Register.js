@@ -5,6 +5,7 @@ import React, {
 }                     from 'react';
 import PropTypes      from 'prop-types';
 import {ErrorBox, LoadingBox, CompanyLookup} from '../../components';
+import {commonPasswords} from '../../config';
 import { Link }       from 'react-router-dom';
 import { Control, Form, Errors, actions } from 'react-redux-form';
 import _ from 'lodash';
@@ -19,7 +20,7 @@ class Register extends Component {
   }
 
   render() {
-    const { registerState, registerForm, searchCompanies, companyLookup } = this.props;
+    const { registerState, registerForm, searchCompanies, companyLookup, postEmployeeRegistration, history } = this.props;
     const { isFetching, isPosting, errorMessage } = registerState;
     const { company } = registerForm;
     return(
@@ -42,8 +43,8 @@ class Register extends Component {
         {this.props.match.params.companyID &&
           <div className="col-md-6 col-md-offset-3">
             <div className="well">
-              <pre>{JSON.stringify(registerState, null, 2)}</pre>
               <pre>{JSON.stringify(registerForm, null, 2)}</pre>
+              <h2>{commonPasswords.find((value) => value === 'hesloheslos')}</h2>
               {!isFetching && company &&
                   <div>
                     <h3>{company.name}</h3>
@@ -66,7 +67,8 @@ class Register extends Component {
                 className="form-horizontal"
                 validators={{
                   '': {
-                    emailsMatch: (values) => values.email === values.emailConfirmation || !values.emailConfirmation || !values.emailConfirmation.length
+                    emailsMatch: (values) => values.email === values.emailConfirmation || !values.emailConfirmation || !values.emailConfirmation.length,
+                    passwordsMatch: (values) => values.password === values.passwordConfirmation || !values.passwordConfirmation || !values.passwordConfirmation.length
                   }
                 }}
               >
@@ -162,6 +164,79 @@ class Register extends Component {
                   />
 
                 </div>
+                <div className="form-group">
+                  <label htmlFor=".phone" className="form-label">Telefon:</label>
+                  <Control
+                    model=".phone"
+                    type="tel"
+                    required
+                    validateOn={["blur","change"]}
+                    className="form-control"
+                  />
+                  <Errors
+                    className="has-error"
+                    component={(props) => <span className="help-block">{props.children}</span>}
+                    model=".phone"
+                    messages={{
+                      valueMissing: 'Tato položka je povinná'
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor=".password" className="form-label">Heslo:</label>
+                  <Control.text
+                    model=".password"
+                    type="password"
+                    required
+                    validators={{
+                      longPassword: (email) => email.length > 7,
+                      notCommonPassword: (password) => commonPasswords.find((value) => value === password) === undefined
+                    }}
+                    validateOn={["blur","change"]}
+                    className="form-control"
+                  />
+                  <Errors
+                    className="has-error"
+                    component={(props) => <span className="help-block">{props.children}</span>}
+                    model=".password"
+                    show="touched"
+                    messages={{
+                      valueMissing: 'Tato položka je povinná',
+                      longPassword: 'Zadejte heslo dlouhé alespoň 8 znaků',
+                      notCommonPassword: 'Zadejte heslo, které není běžně používané na českém internetu'
+                    }}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor=".passwordConfirmation" className="form-label">Heslo pro potvrzení:</label>
+                  <Control.text
+                    model=".passwordConfirmation"
+                    type="password"
+                    required
+                    validators={{
+                    }}
+                    validateOn={["blur","change"]}
+                    className="form-control"
+                  />
+                  <Errors
+                    className="has-error"
+                    component={(props) => <span className="help-block">{props.children}</span>}
+                    model=".passwordConfirmation"
+                    show="touched"
+                    messages={{
+                      valueMissing: 'Tato položka je povinná',
+                    }}
+                  />
+                  <Errors
+                    className="has-error"
+                    component={(props) => <span className="help-block">{props.children}</span>}
+                    model="formData.register"
+                    messages={{
+                      passwordsMatch: 'Hesla musí být shodné'
+                    }}
+                  />
+
+                </div>
                 {!isPosting &&
                   <div className="form-group">
                     <button type="submit" className="btn btn-default btn-lg btn-block">
@@ -173,68 +248,6 @@ class Register extends Component {
                   <LoadingBox/>
                 }
               </Form>
-
-
-              {
-                <form className="form-horizontal">
-                  <fieldset>
-                    <h2>Veřejné informace</h2>
-                    <div className="form-group">
-                      <label>Zaměstnavatel vás uvidí jako:</label>
-                      <input type="text" ref="idExample" name="idExample" disabled placeholder="EM-Q42-DYT"/>
-                    </div>
-                    <h2>Skryté informace</h2>
-                    <div className="form-group">
-                      <label>
-                        Křestní jméno:<br/>
-                        <input type="text" ref="firstName" name="firstName" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        Příjmení:<br/>
-                        <input type="text" ref="lastName" name="lastName" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        E-mailová adresa:<br/>
-                        <input type="text" ref="email" name="email" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        E-mailová adresa pro potvrzení:<br/>
-                        <input type="text" ref="emailInputConfirmation" name="emailConfirmation" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        Telefonní číslo:<br/>
-                        <input type="text" ref="phone" name="phone" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        Heslo:<br/>
-                        <input type="password" ref="password" name="password" />
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label>
-                        Heslo pro potvrzení:<br/>
-                        <input type="password" ref="passwordInputConfirmation" name="passwordInputConfirmation" />
-                      </label>
-                    </div>
-                    <button onClick={(event) => this.handleClick(event)}
-                     className="btn btn-primary">
-                      Registrovat
-                    </button>
-                  </fieldset>
-                </form>
-              }
-
-
             </div>
             <div>
               <pre>{JSON.stringify(this.props, null, 2)}</pre>
