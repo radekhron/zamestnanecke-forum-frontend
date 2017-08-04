@@ -1,19 +1,19 @@
 // @flow weak
 
-import { routerReducer }    from 'react-router-redux';
-import { combineReducers }  from 'redux';
-import { combineForms } from 'react-redux-form';
-import views                from './views';
-import companySearch        from './companySearch';
-import fakeModuleWithFetch  from './fakeModuleWithFetch';
-import register             from './register';
-import login             from './login';
-import userList from './userList';
-import userDetail from './userDetail';
-import objectList from './objectList';
-import issueEdit from './issueEdit';
-import objectEdit from './objectEdit';
-
+import { routerReducer } from "react-router-redux";
+import { combineReducers } from "redux";
+import { combineForms } from "react-redux-form";
+import views from "./views";
+import companySearch from "./companySearch";
+import fakeModuleWithFetch from "./fakeModuleWithFetch";
+import register from "./register";
+import login from "./login";
+import userList from "./userList";
+import userDetail from "./userDetail";
+import objectList from "./objectList";
+import issueEdit from "./issueEdit";
+import objectEdit from "./objectEdit";
+import { initialFormState } from "./formInitialValues";
 
 export const reducers = {
   views,
@@ -28,37 +28,8 @@ export const reducers = {
   objectEdit
 };
 
-const initialThemeState = {
-  name: '',
-  description: '',
-  linkedIssue: '',
-  state: 'In buffer'
-}
-
-const initialIssueState = {
-  name: '',
-  description: '',
-  state: 'Draft',
-  default: 'false',
-  defaultForSpecificNACE: ''
-}
-
-const initialRegisterState = {
-  firstName: '',
-  lastName: '',
-  email: '',
-  emailConfirmation: '',
-  phone: '',
-  password: '',
-  passwordConfirmation: ''
-}
-
 export default combineReducers({
   ...reducers,
-  formData: combineForms({
-    theme: initialThemeState,
-    issue: initialIssueState,
-    register: initialRegisterState
-  }, 'formData'),
+  formData: combineForms(initialFormState, "formData"),
   routing: routerReducer
 });

@@ -16,6 +16,7 @@ import ConnectedEmployeeHome from "./employeeHome/EmployeeHome";
 import ConnectedCompanyList from "./companyList/CompanyList";
 import ConnectedEmailOutbox from "./emailOutbox/EmailOutbox";
 import ConnectedDataboxOutbox from "./databoxOutbox/DataboxOutbox";
+import ConnectedEmailConfirmation from "./emailConfirmation/EmailConfirmation";
 
 export {
   App,
@@ -33,5 +34,6 @@ export {
   ConnectedEmployeeHome,
   ConnectedCompanyList,
   ConnectedEmailOutbox,
-  ConnectedDataboxOutbox
+  ConnectedDataboxOutbox,
+  ConnectedEmailConfirmation
 };

@@ -1,23 +1,29 @@
 // @flow weak
 
-import { connect }            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { UserDetail }               from '../../views';
-import * as userDetailActions      from '../../redux/modules/userDetail';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { UserDetail } from "../../views";
+import * as userDetailActions from "../../redux/modules/userDetail";
+import * as objectEditActions from "../../redux/modules/objectEdit";
 
-
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    userDetailProp: state.userDetail
+    userDetailProp: state.userDetail,
+    editationState: state.objectEdit,
+    user: state.formData.user
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchUserDetail: userDetailActions.fetchUserDetail,
-      employmentConfirmationChangeAction: userDetailActions.employmentConfirmationChangeAction
+      employmentConfirmationChangeAction:
+        userDetailActions.employmentConfirmationChangeAction,
+      fetchObjectDetailAndUpdateFormModel:
+        objectEditActions.fetchObjectDetailAndUpdateFormModel,
+      resetModelDetail: objectEditActions.resetModelDetail,
+      postObjectForCreateOrUpdate: objectEditActions.postObjectForCreateOrUpdate
       // postUserEdit: userDetailActions.postUserEdit
     },
     dispatch
@@ -34,7 +40,4 @@ const mapDispatchToProps = (dispatch) => {
 //   };
 // };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDetail);

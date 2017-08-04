@@ -27,7 +27,7 @@ class DataboxOutbox extends Component {
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
         <div className="col-md-12">
-          {list.map(object =>
+          {_.reverse(list).map(object =>
             <div className="col-md-12" key={object._id}>
               <div className="well">
                 <pre>

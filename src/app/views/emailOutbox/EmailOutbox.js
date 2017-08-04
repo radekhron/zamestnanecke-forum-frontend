@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ErrorBox, LoadingBox } from "../../components";
 import { Link } from "react-router-dom";
+import _ from "lodash";
 
 class EmailOutbox extends Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class EmailOutbox extends Component {
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
         <div className="col-md-12">
-          {list.map(object =>
+          {_.reverse(list).map(object =>
             <div className="col-md-12" key={object._id}>
               <div className="well">
                 <pre>

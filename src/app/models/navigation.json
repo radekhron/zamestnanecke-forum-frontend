@@ -3,14 +3,6 @@
   "leftLinks": [],
   "rightLinks": [
     {
-      "label": "Registrovat",
-      "link": "/registrovat",
-      "view": "registrovat",
-      "isRouteBtn": true,
-      "isAuthenticated": false,
-      "role": null
-    },
-    {
       "label": "Přihlásit",
       "link": "/prihlasit",
       "view": "prihlasit",

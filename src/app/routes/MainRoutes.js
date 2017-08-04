@@ -17,7 +17,8 @@ import {
   ConnectedThemeEdit,
   ConnectedEmployeeHome,
   ConnectedEmailOutbox,
-  ConnectedDataboxOutbox
+  ConnectedDataboxOutbox,
+  ConnectedEmailConfirmation
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
 
@@ -41,6 +42,10 @@ const MainRoutes = () => {
       <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
       <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
       <Route path="/admin/emaily/seznam" component={ConnectedEmailOutbox} />
+      <Route
+        path="/potvrzeni-emailu/:id"
+        component={ConnectedEmailConfirmation}
+      />
       <Route
         path="/admin/datova-schranka/seznam"
         component={ConnectedDataboxOutbox}

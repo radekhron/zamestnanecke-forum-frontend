@@ -17,6 +17,7 @@ import EmployeeHome from "./employeeHome/EmployeeHome.js";
 import CompanyList from "./companyList/CompanyList.js";
 import EmailOutbox from "./emailOutbox/EmailOutbox.js";
 import DataboxOutbox from "./databoxOutbox/DataboxOutbox.js";
+import EmailConfirmation from "./emailConfirmation/EmailConfirmation.js";
 
 export {
   About,
@@ -35,5 +36,6 @@ export {
   EmployeeHome,
   CompanyList,
   EmailOutbox,
-  DataboxOutbox
+  DataboxOutbox,
+  EmailConfirmation
 };
