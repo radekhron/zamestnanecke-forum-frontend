@@ -18,6 +18,7 @@ import CompanyList from "./companyList/CompanyList.js";
 import EmailOutbox from "./emailOutbox/EmailOutbox.js";
 import DataboxOutbox from "./databoxOutbox/DataboxOutbox.js";
 import EmailConfirmation from "./emailConfirmation/EmailConfirmation.js";
+import VotingPreparation from "./votingPreparation/VotingPreparation.js";
 
 export {
   About,
@@ -37,5 +38,6 @@ export {
   CompanyList,
   EmailOutbox,
   DataboxOutbox,
-  EmailConfirmation
+  EmailConfirmation,
+  VotingPreparation
 };

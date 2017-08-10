@@ -18,7 +18,8 @@ import {
   ConnectedEmployeeHome,
   ConnectedEmailOutbox,
   ConnectedDataboxOutbox,
-  ConnectedEmailConfirmation
+  ConnectedEmailConfirmation,
+  ConnectedVotingPreparation
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
 
@@ -31,6 +32,10 @@ const MainRoutes = () => {
       <Route path="/odhlaseni" component={Logout} />
       <Route path="/registrovat/:companyID" component={ConnectedRegister} />
       <Route path="/registrovat" component={ConnectedRegister} />
+      <Route
+        path="/zamestnavatel/registrovat/:registrationToken"
+        component={ConnectedRegister}
+      />
       <Route path="/admin/uzivatele/seznam" component={ConnectedUserList} />
       <Route path="/admin/uzivatele/:userID" component={ConnectedUserDetail} />
       <Route path="/admin/firmy/seznam" component={ConnectedCompanyList} />
@@ -41,6 +46,10 @@ const MainRoutes = () => {
       <Route path="/admin/temata/seznam" component={ConnectedThemeList} />
       <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
       <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
+      <Route
+        path="/admin/hlasovani/prehled"
+        component={ConnectedVotingPreparation}
+      />
       <Route path="/admin/emaily/seznam" component={ConnectedEmailOutbox} />
       <Route
         path="/potvrzeni-emailu/:id"

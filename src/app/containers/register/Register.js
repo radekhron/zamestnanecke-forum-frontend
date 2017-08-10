@@ -1,14 +1,13 @@
 // @flow weak
 
-import { connect }            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Register }               from '../../views';
-import * as registerActions      from '../../redux/modules/register';
-import * as companyLookupActions      from '../../redux/modules/companySearch';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Register } from "../../views";
+import * as registerActions from "../../redux/modules/register";
+import * as companyLookupActions from "../../redux/modules/companySearch";
+import * as objectEditActions from "../../redux/modules/objectEdit";
 
-
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     registerForm: state.formData.register,
     registerState: state.register,
@@ -16,12 +15,14 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchCompanyDetails: registerActions.fetchCompanyDetails,
       postEmployeeRegistration: registerActions.postEmployeeRegistration,
-      searchCompanies: companyLookupActions.searchCompanies
+      postEmployerRegistration: registerActions.postEmployerRegistration,
+      searchCompanies: companyLookupActions.searchCompanies,
+      resetModelDetail: objectEditActions.resetModelDetail
     },
     dispatch
   );
@@ -37,7 +38,4 @@ const mapDispatchToProps = (dispatch) => {
 //   };
 // };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
