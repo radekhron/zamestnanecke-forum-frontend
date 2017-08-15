@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { VotingPreparation } from "../../views";
 import * as objectListActions from "../../redux/modules/objectList";
+import * as objectEditActions from "../../redux/modules/objectEdit";
 import _ from "lodash";
 
 const mapStateToProps = state => {
   return {
     objectList: state.objectList,
+    newSeasonStatus: state.objectEdit,
     next: _.filter(state.objectList.list, ["state", "Next voting season"]),
     inBuffer: _.filter(state.objectList.list, ["state", "In buffer"]),
     inProgress: _.filter(state.objectList.list, [
@@ -23,7 +25,12 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
       fetchThemeList: objectListActions.fetchThemeList,
-      resetList: objectListActions.resetList
+      resetList: objectListActions.resetList,
+      postObjectForCreateOrUpdate:
+        objectEditActions.postObjectForCreateOrUpdate,
+      postObjectForUpdateAndFetchList:
+        objectEditActions.postObjectForUpdateAndFetchList,
+      fetchObjectDetail: objectEditActions.fetchObjectDetail
     },
     dispatch
   );

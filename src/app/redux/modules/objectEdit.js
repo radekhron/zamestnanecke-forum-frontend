@@ -2,6 +2,7 @@ import axios from "axios";
 import _ from "lodash";
 import { appConfig } from "../../config";
 import { actions } from "react-redux-form";
+import { fetchListByEndpoint } from "./objectList";
 
 // /////////////////////
 // constants
@@ -250,6 +251,39 @@ export function deleteEmploymentConfirmation() {
       .then(data => {
         dispatch({ type: DELETE_EMPLOYMENT_CONFIRMATION_SUCCESS });
         dispatch(fetchObjectDetail("/employee/protected/homepage", null));
+      })
+      .catch(err =>
+        dispatch({ type: POST_OBJECT_FAILURE, errorMessage: err.response.data })
+      );
+  };
+}
+
+export function postObjectForUpdateAndFetchList(
+  endpoint,
+  data,
+  newListEndpoint
+) {
+  return dispatch => {
+    dispatch({ type: POST_OBJECT_REQUEST });
+    const url =
+      appConfig.api.serverUrl +
+      appConfig.apiVersion +
+      endpoint +
+      (_.get(data, "_id") || _.get(data, "id"));
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("jwt")
+          ? localStorage.getItem("jwt")
+          : null
+      }
+    })
+      .then(data => {
+        dispatch({ type: POST_OBJECT_SUCCESS });
+        dispatch(fetchListByEndpoint(newListEndpoint));
       })
       .catch(err =>
         dispatch({ type: POST_OBJECT_FAILURE, errorMessage: err.response.data })
