@@ -20,6 +20,7 @@ const initialState = {
   isFetching: false,
   isAuthenticated: decodedJwt ? true : false,
   role: decodedJwt ? decodedJwt.permissions : null,
+  userID: decodedJwt ? decodedJwt.sub : null,
   errorMessage: null
 };
 
@@ -30,6 +31,7 @@ export default function(state = initialState, action) {
         isFetching: true,
         isAuthenticated: false,
         role: null,
+        userID: null,
         errorMessage: null
       });
     case POST_EMPLOYEE_LOGIN_SUCCESS:
@@ -37,6 +39,7 @@ export default function(state = initialState, action) {
         isFetching: false,
         isAuthenticated: true,
         role: action.role,
+        userID: action.userID,
         errorMessage: null
       });
     case POST_EMPLOYEE_LOGIN_FAILURE:
@@ -44,6 +47,7 @@ export default function(state = initialState, action) {
         isFetching: false,
         isAuthenticated: false,
         role: null,
+        userID: null,
         errorMessage: action.errorMessage
       });
     case EMPLOYEE_LOGOUT_SUCCESS:
@@ -51,6 +55,7 @@ export default function(state = initialState, action) {
         isFetching: false,
         isAuthenticated: false,
         role: null,
+        userID: null,
         errorMessage: null
       });
     default:
@@ -77,7 +82,8 @@ export function postEmployeeLogin(loginData) {
         const decodedJwt = parseJwt(data.data.token);
         dispatch({
           type: POST_EMPLOYEE_LOGIN_SUCCESS,
-          role: decodedJwt.permissions
+          role: decodedJwt.permissions,
+          userID: decodedJwt.sub
         });
       })
       .catch(err =>

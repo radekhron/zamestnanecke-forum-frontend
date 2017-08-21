@@ -35,7 +35,7 @@
       "role": "admin"
     },
     {
-      "label": "Seznam uživatelů",
+      "label": "Uživatelé",
       "link": "/admin/uzivatele/seznam",
       "view": "seznam-uzivatelu",
       "isRouteBtn": true,
@@ -43,7 +43,7 @@
       "role": "admin"
     },
     {
-      "label": "Seznam firem",
+      "label": "Firmy",
       "link": "/admin/firmy/seznam",
       "view": "seznam-firem",
       "isRouteBtn": true,
@@ -51,7 +51,7 @@
       "role": "admin"
     },
     {
-      "label": "Seznam šablon",
+      "label": "Šablony",
       "link": "/admin/sablony/seznam",
       "view": "seznam-sablon",
       "isRouteBtn": true,
@@ -59,12 +59,36 @@
       "role": "admin"
     },
     {
-      "label": "Seznam témat",
+      "label": "Témata",
       "link": "/admin/temata/seznam",
       "view": "seznam-temat",
       "isRouteBtn": true,
       "isAuthenticated": true,
       "role": "admin"
+    },
+    {
+      "label": "F-T",
+      "link": "/admin/temata-ve-firmach/seznam",
+      "view": "seznam-temat-ve-firmach",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
+      "label": "Hlasování",
+      "link": "/admin/hlasovani/prehled",
+      "view": "prehled-hlasovani",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
+      "label": "Přehled zaměstnavatele",
+      "link": "/zamestnavatel",
+      "view": "prehled-zamestnavatele",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "employer"
     },
     {
       "label": "Odhlásit",

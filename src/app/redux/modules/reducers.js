@@ -13,9 +13,11 @@ import userDetail from "./userDetail";
 import objectList from "./objectList";
 import issueEdit from "./issueEdit";
 import objectEdit from "./objectEdit";
+import voting from "./voting";
 import { initialFormState } from "./formInitialValues";
 
 export const reducers = {
+  voting,
   views,
   companySearch,
   fakeModuleWithFetch,

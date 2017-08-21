@@ -15,6 +15,7 @@ class EmployeeHome extends Component {
 
     this.handleFinishedUpload = this.handleFinishedUpload.bind(this);
     this.handleFileDelete = this.handleFileDelete.bind(this);
+    this.handleVote = this.handleVote.bind(this);
   }
 
   componentDidMount() {
@@ -32,8 +33,17 @@ class EmployeeHome extends Component {
     deleteEmploymentConfirmation();
   };
 
+  handleVote = e => {
+    const { fetchVoteStatus } = this.props;
+    fetchVoteStatus(
+      "/employee/protected/vote",
+      e.target.getAttribute("data-id"),
+      e.target.getAttribute("data-type")
+    );
+  };
+
   render() {
-    const { homepage } = this.props;
+    const { homepage, votedFor, votableThemes } = this.props;
     const { isFetching, isPosting, object, errorMessage } = homepage;
     const uploadOptions = {
       server: appConfig.api.serverUrl,
@@ -151,6 +161,72 @@ class EmployeeHome extends Component {
                 style={{ width: "{object.company.approvedEmployees / 3}%" }}
               />
             </div>
+          </div>}
+
+        {_.get(object, "homepageType") === "Active company" &&
+          <div className="col-md-12">
+            <h3>Hlasovat můžete pro následující témata:</h3>
+            <h4>
+              Zbývající pozitivní hlasy{" "}
+              {3 - _.filter(votedFor, ["type", "positive"]).length}
+            </h4>
+            <h4>
+              Zbývající negativní hlasy{" "}
+              {1 - _.filter(votedFor, ["type", "negative"]).length}
+            </h4>
+            {_.chunk(votableThemes, 3).map((row, index) =>
+              <div className="row" key={index}>
+                {row.map(theme =>
+                  <div className="col-md-4" key={theme._id}>
+                    <div className="well">
+                      <h3>
+                        {theme.name}
+                      </h3>
+                      <p>
+                        {theme.description}
+                      </p>
+                      <p>
+                        Celková bilance hlasů: {theme.votes.total}
+                      </p>
+                      <button
+                        className={
+                          "btn btn-default" +
+                          " " +
+                          (_.find(votedFor, {
+                            companyThemeID: theme._id,
+                            type: "positive"
+                          })
+                            ? "btn-success"
+                            : "")
+                        }
+                        onClick={this.handleVote}
+                        data-id={theme._id}
+                        data-type="positive"
+                      >
+                        +
+                      </button>
+                      <button
+                        className={
+                          "btn btn-default" +
+                          " " +
+                          (_.find(votedFor, {
+                            companyThemeID: theme._id,
+                            type: "negative"
+                          })
+                            ? "btn-danger"
+                            : "")
+                        }
+                        onClick={this.handleVote}
+                        data-id={theme._id}
+                        data-type="negative"
+                      >
+                        -
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>}
 
         <div className="col-md-12">

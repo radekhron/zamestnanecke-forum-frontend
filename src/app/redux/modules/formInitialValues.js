@@ -50,9 +50,15 @@ const initialUserState = {
   }
 };
 
+const initialCompanyIssueMessageState = {
+  messageText: "",
+  messageAttachments: []
+};
+
 export const initialFormState = {
   theme: initialThemeState,
   issue: initialIssueState,
   register: initialRegisterState,
-  user: initialUserState
+  user: initialUserState,
+  companyIssueMessage: initialCompanyIssueMessageState
 };

@@ -19,7 +19,10 @@ import {
   ConnectedEmailOutbox,
   ConnectedDataboxOutbox,
   ConnectedEmailConfirmation,
-  ConnectedVotingPreparation
+  ConnectedVotingPreparation,
+  ConnectedCompanyThemeList,
+  ConnectedEmployer,
+  ConnectedEmployerCompanyIssue
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
 
@@ -47,6 +50,10 @@ const MainRoutes = () => {
       <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
       <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
       <Route
+        path="/admin/temata-ve-firmach/seznam"
+        component={ConnectedCompanyThemeList}
+      />
+      <Route
         path="/admin/hlasovani/prehled"
         component={ConnectedVotingPreparation}
       />
@@ -60,6 +67,16 @@ const MainRoutes = () => {
         component={ConnectedDataboxOutbox}
       />
       <Route path="/hlavni-stranka" component={ConnectedEmployeeHome} />
+      <Route
+        path="/zamestnavatel/sablony/:companyIssueID"
+        component={ConnectedEmployerCompanyIssue}
+      />
+      <Route
+        path="/admin/firemni-sablony/zpravy/:companyIssueID"
+        component={ConnectedEmployerCompanyIssue}
+      />
+      <Route path="/zamestnavatel" component={ConnectedEmployer} />
+
       <Route path="*" component={PageNotFound} />
     </Switch>
   );

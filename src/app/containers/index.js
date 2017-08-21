@@ -18,6 +18,9 @@ import ConnectedEmailOutbox from "./emailOutbox/EmailOutbox";
 import ConnectedDataboxOutbox from "./databoxOutbox/DataboxOutbox";
 import ConnectedEmailConfirmation from "./emailConfirmation/EmailConfirmation";
 import ConnectedVotingPreparation from "./votingPreparation/VotingPreparation";
+import ConnectedCompanyThemeList from "./companyThemeList/CompanyThemeList";
+import ConnectedEmployer from "./employer/Employer";
+import ConnectedEmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 
 export {
   App,
@@ -37,5 +40,8 @@ export {
   ConnectedEmailOutbox,
   ConnectedDataboxOutbox,
   ConnectedEmailConfirmation,
-  ConnectedVotingPreparation
+  ConnectedVotingPreparation,
+  ConnectedCompanyThemeList,
+  ConnectedEmployer,
+  ConnectedEmployerCompanyIssue
 };

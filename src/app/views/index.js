@@ -19,6 +19,9 @@ import EmailOutbox from "./emailOutbox/EmailOutbox.js";
 import DataboxOutbox from "./databoxOutbox/DataboxOutbox.js";
 import EmailConfirmation from "./emailConfirmation/EmailConfirmation.js";
 import VotingPreparation from "./votingPreparation/VotingPreparation.js";
+import CompanyThemeList from "./companyThemeList/CompanyThemeList";
+import Employer from "./employer/Employer";
+import EmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 
 export {
   About,
@@ -39,5 +42,8 @@ export {
   EmailOutbox,
   DataboxOutbox,
   EmailConfirmation,
-  VotingPreparation
+  VotingPreparation,
+  CompanyThemeList,
+  Employer,
+  EmployerCompanyIssue
 };

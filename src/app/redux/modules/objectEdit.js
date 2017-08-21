@@ -291,6 +291,50 @@ export function postObjectForUpdateAndFetchList(
   };
 }
 
+export function postObjectToEndpointAndUpdate(endpoint, ID, data) {
+  return dispatch => {
+    dispatch({ type: POST_OBJECT_REQUEST });
+    const url =
+      appConfig.api.serverUrl + appConfig.apiVersion + endpoint + "/" + ID;
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("jwt")
+          ? localStorage.getItem("jwt")
+          : null
+      }
+    })
+      .then(data => {
+        dispatch({ type: POST_OBJECT_SUCCESS });
+        dispatch(fetchObjectDetail(endpoint + "/", ID));
+        if (endpoint === "/employer/companyissue") {
+          dispatch(resetModelDetail("formData.companyIssueMessage"));
+        }
+      })
+      .catch(err =>
+        dispatch({
+          type: POST_OBJECT_FAILURE,
+          errorMessage: _.get(err, "response.data")
+        })
+      );
+  };
+}
+
+export function pushItemToModel(model, item) {
+  return dispatch => {
+    dispatch(actions.push(model, item));
+  };
+}
+
+export function removeItemFromModel(model, index) {
+  return dispatch => {
+    dispatch(actions.remove(model, index));
+  };
+}
+
 // export function formChangeAction(value, target) {
 //   return dispatch => {
 //     dispatch({type: CHANGE_FORM_VALUE, newValue: value, target: target});
