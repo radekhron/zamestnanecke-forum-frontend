@@ -21,6 +21,7 @@ import ConnectedVotingPreparation from "./votingPreparation/VotingPreparation";
 import ConnectedCompanyThemeList from "./companyThemeList/CompanyThemeList";
 import ConnectedEmployer from "./employer/Employer";
 import ConnectedEmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
+import ConnectedTaskList from "./taskList/TaskList";
 
 export {
   App,
@@ -43,5 +44,6 @@ export {
   ConnectedVotingPreparation,
   ConnectedCompanyThemeList,
   ConnectedEmployer,
-  ConnectedEmployerCompanyIssue
+  ConnectedEmployerCompanyIssue,
+  ConnectedTaskList
 };

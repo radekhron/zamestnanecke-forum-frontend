@@ -22,6 +22,7 @@ import VotingPreparation from "./votingPreparation/VotingPreparation.js";
 import CompanyThemeList from "./companyThemeList/CompanyThemeList";
 import Employer from "./employer/Employer";
 import EmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
+import TaskList from "./taskList/TaskList";
 
 export {
   About,
@@ -45,5 +46,6 @@ export {
   VotingPreparation,
   CompanyThemeList,
   Employer,
-  EmployerCompanyIssue
+  EmployerCompanyIssue,
+  TaskList
 };

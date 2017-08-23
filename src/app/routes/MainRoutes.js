@@ -22,7 +22,8 @@ import {
   ConnectedVotingPreparation,
   ConnectedCompanyThemeList,
   ConnectedEmployer,
-  ConnectedEmployerCompanyIssue
+  ConnectedEmployerCompanyIssue,
+  ConnectedTaskList
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
 
@@ -57,6 +58,7 @@ const MainRoutes = () => {
         path="/admin/hlasovani/prehled"
         component={ConnectedVotingPreparation}
       />
+      <Route path="/admin/ukoly" component={ConnectedTaskList} />
       <Route path="/admin/emaily/seznam" component={ConnectedEmailOutbox} />
       <Route
         path="/potvrzeni-emailu/:id"
