@@ -37,13 +37,13 @@ class TaskList extends Component {
                   </h5>
                   <Link
                     className="btn btn-danger btn-lg btn-block"
-                    to={"/admin/sablony/" + object._id}
+                    to={"/admin/firemni-sablony/zpravy/" + object._id}
                   >
                     Odpovědět
                   </Link>
                   <Link
                     className="btn btn-danger btn-lg btn-block"
-                    to={"/admin/sablony/" + object._id}
+                    to={"/admin/firemni-sablony/publikace/" + object._id}
                   >
                     Připravit k zveřejnění
                   </Link>

@@ -26,14 +26,7 @@ class CompanyList extends Component {
         </div>
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
-        <div className="col-md-6 col-md-offset-3 well">
-          <Link
-            className="btn btn-info btn-lg btn-block"
-            to={"/admin/temata/vytvorit"}
-          >
-            Vytvořit nové téma
-          </Link>
-        </div>
+
         <div className="col-md-12">
           {list.map(object =>
             <div className="col-md-4" key={object._id}>
@@ -41,12 +34,6 @@ class CompanyList extends Component {
                 <pre>
                   {JSON.stringify(object, null, 2)}
                 </pre>
-                <Link
-                  className="btn btn-info btn-lg btn-block"
-                  to={"/admin/temata/" + object._id}
-                >
-                  Upravit
-                </Link>
               </div>
             </div>
           )}

@@ -20,12 +20,20 @@ class EmployerCompanyIssue extends Component {
   }
 
   componentDidMount() {
-    const { fetchObjectDetail, resetModelDetail } = this.props;
+    const { fetchObjectDetail, resetModelDetail, match } = this.props;
+    const { path } = match;
+    if (path === "/admin/firemni-sablony/zpravy/:companyIssueID") {
+      fetchObjectDetail(
+        "/admin/companyissue/message/",
+        this.props.match.params.companyIssueID
+      );
+    } else {
+      fetchObjectDetail(
+        "/employer/companyissue/",
+        this.props.match.params.companyIssueID
+      );
+    }
     resetModelDetail("formData.companyIssueMessage");
-    fetchObjectDetail(
-      "/employer/companyissue/",
-      this.props.match.params.companyIssueID
-    );
   }
 
   handleBackClick(event) {
@@ -53,9 +61,12 @@ class EmployerCompanyIssue extends Component {
       companyIssue,
       message,
       postObjectToEndpointAndUpdate,
-      userID
+      userID,
+      match,
+      resetModelDetail
     } = this.props;
     const { isFetching, isPosting, errorMessage, object } = companyIssue;
+    const { path } = match;
     const uploadOptions = {
       server: appConfig.api.serverUrl,
       s3Url: appConfig.api.serverUrl + appConfig.apiVersion + "/s3/uploads/",
@@ -74,7 +85,9 @@ class EmployerCompanyIssue extends Component {
             </p>
           </div>}
         {object &&
-          _.get(object, "messaging").length > 0 &&
+          (_.get(object, "messaging")
+            ? _.get(object, "messaging").length > 0
+            : false) &&
           <div className="section">
             {object.messaging.map((message, index) =>
               <div
@@ -83,6 +96,7 @@ class EmployerCompanyIssue extends Component {
                     ? "col-md-7 col-md-offset-5"
                     : "col-md-7"
                 }
+                key={index}
               >
                 <div
                   className={
@@ -101,7 +115,7 @@ class EmployerCompanyIssue extends Component {
                       <div>
                         <h5>Přílohy:</h5>
                         {message.messageAttachments.map(attachment =>
-                          <div>
+                          <div key={attachment}>
                             <a
                               href={
                                 appConfig.api.serverUrl +
@@ -122,12 +136,22 @@ class EmployerCompanyIssue extends Component {
         <div className="col-md-6 col-md-offset-3">
           <Form
             model="formData.companyIssueMessage"
-            onSubmit={v =>
-              postObjectToEndpointAndUpdate(
-                "/employer/companyissue",
-                object._id,
-                v
-              )}
+            onSubmit={v => {
+              if (path === "/admin/firemni-sablony/zpravy/:companyIssueID") {
+                postObjectToEndpointAndUpdate(
+                  "/admin/companyissue/message",
+                  object._id,
+                  v
+                );
+              } else {
+                postObjectToEndpointAndUpdate(
+                  "/employer/companyissue",
+                  object._id,
+                  v
+                );
+              }
+              resetModelDetail("formData.companyIssueMessage");
+            }}
             className="form-horizontal"
           >
             <div className="form-group">
@@ -203,16 +227,6 @@ class EmployerCompanyIssue extends Component {
               </div>}
             {isPosting && <LoadingBox />}
           </Form>
-        </div>
-        <div className="col-md-6 col-md-offset-3">
-          <pre>
-            {JSON.stringify(message, null, 2)}
-          </pre>
-        </div>
-        <div className="col-md-12">
-          <pre>
-            {JSON.stringify(this.props, null, 2)}
-          </pre>
         </div>
       </div>
     );
