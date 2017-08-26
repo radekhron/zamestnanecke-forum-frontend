@@ -40,7 +40,7 @@ class CompanyIssueList extends Component {
                   Odpovědět
                 </Link>
                 <Link
-                  className="btn btn-danger btn-lg btn-block"
+                  className="btn btn-success btn-lg btn-block"
                   to={"/admin/firemni-sablony/publikace/" + object._id}
                 >
                   Připravit k zveřejnění

@@ -23,6 +23,7 @@ import CompanyThemeList from "./companyThemeList/CompanyThemeList";
 import CompanyIssueList from "./companyIssueList/CompanyIssueList";
 import Employer from "./employer/Employer";
 import EmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
+import PublishCompanyIssue from "./publishCompanyIssue/PublishCompanyIssue";
 import TaskList from "./taskList/TaskList";
 
 export {
@@ -49,5 +50,6 @@ export {
   CompanyIssueList,
   Employer,
   EmployerCompanyIssue,
+  PublishCompanyIssue,
   TaskList
 };

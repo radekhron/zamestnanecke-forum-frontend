@@ -58,7 +58,8 @@ const initialCompanyIssueMessageState = {
 const initialCompanyIssuePublishState = {
   officialResponse: "",
   attachments: [],
-  attachmentsToBePublished: []
+  attachmentsToBePublished: [],
+  state: "Published"
 };
 
 export const initialFormState = {

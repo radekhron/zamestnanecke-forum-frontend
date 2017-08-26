@@ -100,7 +100,12 @@ export default function(state = initialState, action) {
 // action creators
 // /////////////////////
 
-export function fetchObjectDetailAndUpdateFormModel(endpoint, ID, model) {
+export function fetchObjectDetailAndUpdateFormModel(
+  endpoint,
+  ID,
+  model,
+  dataPath = null
+) {
   return dispatch => {
     dispatch({ type: FETCH_OBJECT_REQUEST });
     const url = appConfig.api.serverUrl + appConfig.apiVersion + endpoint + ID;
@@ -115,8 +120,8 @@ export function fetchObjectDetailAndUpdateFormModel(endpoint, ID, model) {
       }
     })
       .then(data => {
-        dispatch({ type: FETCH_OBJECT_SUCCESS });
-        dispatch(actions.merge(model, data.data));
+        dispatch({ type: FETCH_OBJECT_SUCCESS, object: data.data });
+        dispatch(actions.merge(model, _.get(data.data, dataPath, data.data)));
       })
       .catch(err =>
         dispatch({
@@ -332,6 +337,42 @@ export function pushItemToModel(model, item) {
 export function removeItemFromModel(model, index) {
   return dispatch => {
     dispatch(actions.remove(model, index));
+  };
+}
+
+export function mergeDataWithModel(model, data) {
+  return dispatch => {
+    dispatch(actions.merge(model, data));
+  };
+}
+
+export function postCompanyIssueForPublishAndForwardToTheList(
+  ID,
+  data,
+  history
+) {
+  return dispatch => {
+    dispatch({ type: POST_OBJECT_REQUEST });
+    const endpoint = "/admin/companyissue/";
+    const url = appConfig.api.serverUrl + appConfig.apiVersion + endpoint + ID;
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("jwt")
+          ? localStorage.getItem("jwt")
+          : null
+      }
+    })
+      .then(data => {
+        dispatch({ type: POST_OBJECT_SUCCESS });
+        history.push("/admin/pozadavky-ve-firmach/seznam");
+      })
+      .catch(err =>
+        dispatch({ type: POST_OBJECT_FAILURE, errorMessage: err.response.data })
+      );
   };
 }
 

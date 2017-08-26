@@ -22,6 +22,7 @@ import ConnectedCompanyThemeList from "./companyThemeList/CompanyThemeList";
 import ConnectedCompanyIssueList from "./companyIssueList/CompanyIssueList";
 import ConnectedEmployer from "./employer/Employer";
 import ConnectedEmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
+import ConnectedPublishCompanyIssue from "./publishCompanyIssue/PublishCompanyIssue";
 import ConnectedTaskList from "./taskList/TaskList";
 
 export {
@@ -47,5 +48,6 @@ export {
   ConnectedCompanyIssueList,
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
+  ConnectedPublishCompanyIssue,
   ConnectedTaskList
 };

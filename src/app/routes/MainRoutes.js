@@ -24,6 +24,7 @@ import {
   ConnectedCompanyIssueList,
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
+  ConnectedPublishCompanyIssue,
   ConnectedTaskList
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
@@ -84,7 +85,7 @@ const MainRoutes = () => {
       />
       <Route
         path="/admin/firemni-sablony/publikace/:companyIssueID"
-        component={ConnectedEmployerCompanyIssue}
+        component={ConnectedPublishCompanyIssue}
       />
       <Route path="/zamestnavatel" component={ConnectedEmployer} />
 
