@@ -51,9 +51,9 @@
       "role": "admin"
     },
     {
-      "label": "Šablony",
+      "label": "Požadavky",
       "link": "/admin/sablony/seznam",
-      "view": "seznam-sablon",
+      "view": "seznam-pozadavku",
       "isRouteBtn": true,
       "isAuthenticated": true,
       "role": "admin"
@@ -75,9 +75,25 @@
       "role": "admin"
     },
     {
+      "label": "F-P",
+      "link": "/admin/pozadavky-ve-firmach/seznam",
+      "view": "seznam-pozadavku-ve-firmach",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
       "label": "Hlasování",
       "link": "/admin/hlasovani/prehled",
       "view": "prehled-hlasovani",
+      "isRouteBtn": true,
+      "isAuthenticated": true,
+      "role": "admin"
+    },
+    {
+      "label": "Úkoly",
+      "link": "/admin/ukoly",
+      "view": "ukoly",
       "isRouteBtn": true,
       "isAuthenticated": true,
       "role": "admin"

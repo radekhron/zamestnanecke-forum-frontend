@@ -21,6 +21,7 @@ import {
   ConnectedEmailConfirmation,
   ConnectedVotingPreparation,
   ConnectedCompanyThemeList,
+  ConnectedCompanyIssueList,
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
   ConnectedTaskList
@@ -55,6 +56,10 @@ const MainRoutes = () => {
         component={ConnectedCompanyThemeList}
       />
       <Route
+        path="/admin/pozadavky-ve-firmach/seznam"
+        component={ConnectedCompanyIssueList}
+      />
+      <Route
         path="/admin/hlasovani/prehled"
         component={ConnectedVotingPreparation}
       />
@@ -75,6 +80,10 @@ const MainRoutes = () => {
       />
       <Route
         path="/admin/firemni-sablony/zpravy/:companyIssueID"
+        component={ConnectedEmployerCompanyIssue}
+      />
+      <Route
+        path="/admin/firemni-sablony/publikace/:companyIssueID"
         component={ConnectedEmployerCompanyIssue}
       />
       <Route path="/zamestnavatel" component={ConnectedEmployer} />

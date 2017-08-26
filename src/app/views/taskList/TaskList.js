@@ -23,7 +23,9 @@ class TaskList extends Component {
         </div>
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
-        {_.get(object, "companyIssues") &&
+        {(_.get(object, "companyIssues")
+          ? _.get(object, "companyIssues").length > 0
+          : false) &&
           <div className="col-md-12">
             <h2>Požadavky s odpovědí zaměstnavatele</h2>
             {_.get(object, "companyIssues").map(object =>

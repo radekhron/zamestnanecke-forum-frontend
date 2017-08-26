@@ -19,6 +19,7 @@ import ConnectedDataboxOutbox from "./databoxOutbox/DataboxOutbox";
 import ConnectedEmailConfirmation from "./emailConfirmation/EmailConfirmation";
 import ConnectedVotingPreparation from "./votingPreparation/VotingPreparation";
 import ConnectedCompanyThemeList from "./companyThemeList/CompanyThemeList";
+import ConnectedCompanyIssueList from "./companyIssueList/CompanyIssueList";
 import ConnectedEmployer from "./employer/Employer";
 import ConnectedEmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 import ConnectedTaskList from "./taskList/TaskList";
@@ -43,6 +44,7 @@ export {
   ConnectedEmailConfirmation,
   ConnectedVotingPreparation,
   ConnectedCompanyThemeList,
+  ConnectedCompanyIssueList,
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
   ConnectedTaskList

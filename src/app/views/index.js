@@ -20,6 +20,7 @@ import DataboxOutbox from "./databoxOutbox/DataboxOutbox.js";
 import EmailConfirmation from "./emailConfirmation/EmailConfirmation.js";
 import VotingPreparation from "./votingPreparation/VotingPreparation.js";
 import CompanyThemeList from "./companyThemeList/CompanyThemeList";
+import CompanyIssueList from "./companyIssueList/CompanyIssueList";
 import Employer from "./employer/Employer";
 import EmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 import TaskList from "./taskList/TaskList";
@@ -45,6 +46,7 @@ export {
   EmailConfirmation,
   VotingPreparation,
   CompanyThemeList,
+  CompanyIssueList,
   Employer,
   EmployerCompanyIssue,
   TaskList

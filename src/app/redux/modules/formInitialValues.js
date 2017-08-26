@@ -55,10 +55,17 @@ const initialCompanyIssueMessageState = {
   messageAttachments: []
 };
 
+const initialCompanyIssuePublishState = {
+  officialResponse: "",
+  attachments: [],
+  attachmentsToBePublished: []
+};
+
 export const initialFormState = {
   theme: initialThemeState,
   issue: initialIssueState,
   register: initialRegisterState,
   user: initialUserState,
-  companyIssueMessage: initialCompanyIssueMessageState
+  companyIssueMessage: initialCompanyIssueMessageState,
+  companyIssuePublish: initialCompanyIssuePublishState
 };
