@@ -2,11 +2,17 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ErrorBox, LoadingBox } from "../../components";
+import {
+  ErrorBox,
+  LoadingBox,
+  ObjectState,
+  ObjectCreatedDate
+} from "../../components";
 import { appConfig } from "../../config";
 import { Link } from "react-router-dom";
 import { Control, Form, Errors, actions } from "react-redux-form";
 import _ from "lodash";
+import moment from "moment";
 import DropzoneS3Uploader from "react-dropzone-s3-uploader";
 
 class EmployeeHome extends Component {
@@ -227,13 +233,83 @@ class EmployeeHome extends Component {
                 )}
               </div>
             )}
+            <h3>Požadavky na zaměstnavatele</h3>
+            {_.chunk(_.get(object, "issues"), 3).map((row, index) =>
+              <div className="row" key={index}>
+                {row.map(issue =>
+                  <div className="col-md-4" key={issue._id}>
+                    <div className="well">
+                      <h3>
+                        {issue.name}
+                      </h3>
+                      <p>
+                        {issue.description}
+                      </p>
+                      <p>
+                        <strong>Požadavek zaslán zaměstnavateli:</strong>
+                        <br />
+                        <ObjectCreatedDate mongodbID={issue._id} />
+                      </p>
+                      {issue.lastEditDate &&
+                        <p>
+                          <strong>Poslední aktivita:</strong>
+                          <br />
+                          {moment(issue.lastEditDate).format("D. M. YYYY")}
+                        </p>}
+                      <p>
+                        <strong>Stav:</strong>
+                        <br />
+                        <ObjectState
+                          state={issue.state}
+                          model={{
+                            Created: {
+                              style: "info",
+                              text: "Zadán zaměstnavateli"
+                            },
+                            "To rework": {
+                              style: "warning",
+                              text: "K přepracování"
+                            },
+                            Published: {
+                              style: "success",
+                              text: "Zveřejněné výsledky"
+                            }
+                          }}
+                        />
+                      </p>
+                      {issue.officialResponse &&
+                        <p>
+                          <strong>Vyjádření zaměstnavatele:</strong>
+                          <br />
+                          {issue.officialResponse}
+                        </p>}
+                      <p>
+                        <strong>Přílohy:</strong>
+                      </p>
+                      <ul>
+                        {issue.attachmentsToBePublished.map(attachment =>
+                          <li key={attachment}>
+                            <a
+                              href={
+                                appConfig.api.serverUrl +
+                                appConfig.apiVersion +
+                                attachment
+                              }
+                            >
+                              {_.last(_.split(attachment, "/"))}
+                            </a>
+                          </li>
+                        )}
+                      </ul>
+                      <pre>
+                        {JSON.stringify(issue, null, 2)}
+                      </pre>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>}
-
-        <div className="col-md-12">
-          <pre>
-            {JSON.stringify(this.props, null, 2)}
-          </pre>
-        </div>
       </div>
     );
   }

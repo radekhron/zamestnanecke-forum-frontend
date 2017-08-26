@@ -7,6 +7,8 @@ import CompanyLookup from "./companyLookup/CompanyLookup";
 import TestComponent from "./testComponent/TestComponent";
 import ErrorBox from "./errorBox/ErrorBox";
 import LoadingBox from "./loadingBox/LoadingBox";
+import ObjectState from "./objectState/ObjectState";
+import ObjectCreatedDate from "./objectCreatedDate/ObjectCreatedDate";
 import VotingPreparationThemeBoxes from "./votingPreparationThemeBoxes/VotingPreparationThemeBoxes";
 
 export {
@@ -17,5 +19,7 @@ export {
   TestComponent,
   ErrorBox,
   LoadingBox,
+  ObjectState,
+  ObjectCreatedDate,
   VotingPreparationThemeBoxes
 };
