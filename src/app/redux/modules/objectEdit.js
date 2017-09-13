@@ -376,6 +376,30 @@ export function postCompanyIssueForPublishAndForwardToTheList(
   };
 }
 
+export function postObjectToEndpoint(endpoint, data) {
+  return dispatch => {
+    dispatch({ type: POST_OBJECT_REQUEST });
+    const url = appConfig.api.serverUrl + appConfig.apiVersion + endpoint;
+    axios({
+      method: "post",
+      url: url,
+      data: data,
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("jwt")
+          ? localStorage.getItem("jwt")
+          : null
+      }
+    })
+      .then(data => {
+        dispatch({ type: POST_OBJECT_SUCCESS });
+      })
+      .catch(err =>
+        dispatch({ type: POST_OBJECT_FAILURE, errorMessage: err.response.data })
+      );
+  };
+}
+
 // export function formChangeAction(value, target) {
 //   return dispatch => {
 //     dispatch({type: CHANGE_FORM_VALUE, newValue: value, target: target});

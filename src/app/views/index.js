@@ -25,6 +25,8 @@ import Employer from "./employer/Employer";
 import EmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 import PublishCompanyIssue from "./publishCompanyIssue/PublishCompanyIssue";
 import TaskList from "./taskList/TaskList";
+import CompanyEdit from "./companyEdit/CompanyEdit";
+import LaunchCompanyIssue from "./launchCompanyIssue/LaunchCompanyIssue";
 
 export {
   About,
@@ -51,5 +53,7 @@ export {
   Employer,
   EmployerCompanyIssue,
   PublishCompanyIssue,
-  TaskList
+  TaskList,
+  CompanyEdit,
+  LaunchCompanyIssue
 };

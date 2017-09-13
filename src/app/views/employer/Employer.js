@@ -22,7 +22,7 @@ class Employer extends Component {
     return (
       <div className="col-md-12">
         <div className="col-md-6 col-md-offset-3 text-center">
-          <h1>Seznam šablon</h1>
+          <h1>Seznam požadavků</h1>
         </div>
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}

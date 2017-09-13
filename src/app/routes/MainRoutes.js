@@ -10,6 +10,7 @@ import {
   ConnectedLogin,
   ConnectedUserList,
   ConnectedCompanyList,
+  ConnectedCompanyEdit,
   ConnectedUserDetail,
   ConnectedIssueList,
   ConnectedIssueEdit,
@@ -25,7 +26,8 @@ import {
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
   ConnectedPublishCompanyIssue,
-  ConnectedTaskList
+  ConnectedTaskList,
+  ConnectedLaunchCompanyIssue
 } from "../containers";
 import { PageNotFound, Logout } from "../views";
 
@@ -45,13 +47,17 @@ const MainRoutes = () => {
       <Route path="/admin/uzivatele/seznam" component={ConnectedUserList} />
       <Route path="/admin/uzivatele/:userID" component={ConnectedUserDetail} />
       <Route path="/admin/firmy/seznam" component={ConnectedCompanyList} />
-      <Route path="/admin/firmy/:userID" component={ConnectedCompanyList} />
+      <Route path="/admin/firmy/:companyID" component={ConnectedCompanyEdit} />
       <Route path="/admin/sablony/seznam" component={ConnectedIssueList} />
       <Route path="/admin/sablony/vytvorit" component={ConnectedIssueEdit} />
       <Route path="/admin/sablony/:issueID" component={ConnectedIssueEdit} />
       <Route path="/admin/temata/seznam" component={ConnectedThemeList} />
       <Route path="/admin/temata/vytvorit" component={ConnectedThemeEdit} />
       <Route path="/admin/temata/:themeID" component={ConnectedThemeEdit} />
+      <Route
+        path="/admin/spustit-pozadavek/firma/:companyID"
+        component={ConnectedLaunchCompanyIssue}
+      />
       <Route
         path="/admin/temata-ve-firmach/seznam"
         component={ConnectedCompanyThemeList}

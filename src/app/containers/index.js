@@ -24,6 +24,8 @@ import ConnectedEmployer from "./employer/Employer";
 import ConnectedEmployerCompanyIssue from "./employerCompanyIssue/EmployerCompanyIssue";
 import ConnectedPublishCompanyIssue from "./publishCompanyIssue/PublishCompanyIssue";
 import ConnectedTaskList from "./taskList/TaskList";
+import ConnectedCompanyEdit from "./companyEdit/CompanyEdit";
+import ConnectedLaunchCompanyIssue from "./launchCompanyIssue/LaunchCompanyIssue";
 
 export {
   App,
@@ -49,5 +51,7 @@ export {
   ConnectedEmployer,
   ConnectedEmployerCompanyIssue,
   ConnectedPublishCompanyIssue,
-  ConnectedTaskList
+  ConnectedTaskList,
+  ConnectedCompanyEdit,
+  ConnectedLaunchCompanyIssue
 };

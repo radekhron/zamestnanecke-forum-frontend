@@ -62,11 +62,36 @@ const initialCompanyIssuePublishState = {
   state: "Published"
 };
 
+const initialCompanyState = {
+  companyID: "",
+  name: "",
+  waitingEmployees: 1,
+  approvedEmployees: 0,
+  contactInformation: {
+    street: "",
+    city: "",
+    zip: "",
+    country: "",
+    email: "",
+    phone: "",
+    dataBoxID: ""
+  },
+  state: "",
+  defaultIssuesGenerated: false
+};
+
+const initialLaunchCompanyIssue = {
+  companyID: "",
+  issueID: ""
+};
+
 export const initialFormState = {
   theme: initialThemeState,
   issue: initialIssueState,
   register: initialRegisterState,
   user: initialUserState,
   companyIssueMessage: initialCompanyIssueMessageState,
-  companyIssuePublish: initialCompanyIssuePublishState
+  companyIssuePublish: initialCompanyIssuePublishState,
+  company: initialCompanyState,
+  launchCompanyIssue: initialLaunchCompanyIssue
 };

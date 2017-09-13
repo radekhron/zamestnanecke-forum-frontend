@@ -223,29 +223,6 @@ class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor=".phone" className="form-label">
-                    Telefon:
-                  </label>
-                  <Control
-                    model=".phone"
-                    type="tel"
-                    required
-                    validateOn={["blur", "change"]}
-                    className="form-control"
-                  />
-                  <Errors
-                    className="has-error"
-                    component={props =>
-                      <span className="help-block">
-                        {props.children}
-                      </span>}
-                    model=".phone"
-                    messages={{
-                      valueMissing: "Tato položka je povinná"
-                    }}
-                  />
-                </div>
-                <div className="form-group">
                   <label htmlFor=".password" className="form-label">
                     Heslo:
                   </label>
