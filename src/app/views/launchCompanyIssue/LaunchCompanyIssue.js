@@ -19,8 +19,10 @@ class LaunchCompanyIssue extends Component {
     const {
       fetchIssueList,
       fetchObjectDetail,
-      mergeDataWithModel
+      mergeDataWithModel,
+      resetObjectEdit
     } = this.props;
+    resetObjectEdit();
     fetchIssueList();
     fetchObjectDetail("/admin/company/", this.props.match.params.companyID);
     mergeDataWithModel("formData.launchCompanyIssue", {
@@ -55,60 +57,71 @@ class LaunchCompanyIssue extends Component {
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
         <div className="col-md-6 col-md-offset-3">
-          <div className="well">
-            <Form
-              model="formData.launchCompanyIssue"
-              onSubmit={formValues =>
-                postObjectToEndpoint("/admin/launch-companyissue", formValues)}
-              className="form-horizontal"
-            >
-              <div className="form-group">
-                <label htmlFor=".issueID" className="form-label">
-                  Navázaný požadavek:
-                </label>
-                <Control.select
-                  model=".issueID"
-                  required
-                  className="form-control"
-                  validators={{ valueMissing: val => val.length > 0 }}
-                  validateOn="blur"
-                >
-                  <option value="" disabled>
-                    Vyberte požadavek
-                  </option>
-                  {_.filter(issueList.list, {
-                    state: "Active",
-                    default: false
-                  }).map(issue =>
-                    <option value={issue._id} key={issue._id}>
-                      {issue.name}
-                    </option>
-                  )}
-                </Control.select>
-                <Errors
-                  className="has-error"
-                  component={props =>
-                    <span className="help-block">
-                      {props.children}
-                    </span>}
-                  model=".linkedIssue"
-                  messages={{
-                    valueMissing: "Tato položka je povinná"
-                  }}
-                />
-              </div>
-              {!isPosting &&
+          {!objectEdit.wasPosting &&
+            <div className="well">
+              <Form
+                model="formData.launchCompanyIssue"
+                onSubmit={formValues => {
+                  if (confirm("Opravdu chcete poslat tento požadavek?")) {
+                    postObjectToEndpoint(
+                      "/admin/launch-companyissue",
+                      formValues
+                    );
+                  }
+                }}
+                className="form-horizontal"
+              >
                 <div className="form-group">
-                  <button
-                    type="submit"
-                    className="btn btn-default btn-lg btn-block"
+                  <label htmlFor=".issueID" className="form-label">
+                    Navázaný požadavek:
+                  </label>
+                  <Control.select
+                    model=".issueID"
+                    required
+                    className="form-control"
+                    validators={{ valueMissing: val => val.length > 0 }}
+                    validateOn="blur"
                   >
-                    Poslat firmě požadavek
-                  </button>
-                </div>}
-            </Form>
-            {JSON.stringify(launchCompanyIssue, null, 2)}
-          </div>
+                    <option value="" disabled>
+                      Vyberte požadavek
+                    </option>
+                    {_.filter(issueList.list, {
+                      state: "Active",
+                      default: false
+                    }).map(issue =>
+                      <option value={issue._id} key={issue._id}>
+                        {issue.name}
+                      </option>
+                    )}
+                  </Control.select>
+                  <Errors
+                    className="has-error"
+                    component={props =>
+                      <span className="help-block">
+                        {props.children}
+                      </span>}
+                    model=".linkedIssue"
+                    messages={{
+                      valueMissing: "Tato položka je povinná"
+                    }}
+                  />
+                </div>
+                {!isPosting &&
+                  <div className="form-group">
+                    <button
+                      type="submit"
+                      className="btn btn-default btn-lg btn-block"
+                    >
+                      Poslat firmě požadavek
+                    </button>
+                  </div>}
+              </Form>
+              {JSON.stringify(launchCompanyIssue, null, 2)}
+            </div>}
+          {objectEdit.wasPosting &&
+            <div className="alert alert-success">
+              Požadavek zaslán zaměstnavateli
+            </div>}
         </div>
         <div className="col-md-12">
           <pre>

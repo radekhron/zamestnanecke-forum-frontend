@@ -53,12 +53,15 @@ class CompanyEdit extends Component {
           </button>
         </div>
         <div className="col-md-6 col-md-offset-3">
-          <button
-            className="btn btn-info btn-lg btn-block"
-            onClick={this.handleBackClick}
+          <Link
+            className="btn btn-info btn-block btn-lg"
+            to={
+              "/admin/spustit-pozadavek/firma/" +
+              this.props.match.params.companyID
+            }
           >
-            Spustit nový požadavek
-          </button>
+            Spustit požadavek pro firmu
+          </Link>
         </div>
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}

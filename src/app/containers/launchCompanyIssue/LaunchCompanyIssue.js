@@ -20,7 +20,8 @@ const mapDispatchToProps = dispatch => {
       fetchIssueList: objectListActions.fetchIssueList,
       fetchObjectDetail: objectEditActions.fetchObjectDetail,
       postObjectToEndpoint: objectEditActions.postObjectToEndpoint,
-      mergeDataWithModel: objectEditActions.mergeDataWithModel
+      mergeDataWithModel: objectEditActions.mergeDataWithModel,
+      resetObjectEdit: objectEditActions.resetObjectEdit
     },
     dispatch
   );

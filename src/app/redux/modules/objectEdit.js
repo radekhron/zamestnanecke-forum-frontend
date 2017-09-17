@@ -22,6 +22,8 @@ const POST_EMPLOYMENT_CONFIRMATION_SUCCESS =
 const DELETE_EMPLOYMENT_CONFIRMATION_SUCCESS =
   "DELETE_EMPLOYMENT_CONFIRMATION_SUCCESS";
 
+const RESET_OBJECT_EDIT = "RESET_OBJECT_EDIT";
+
 // /////////////////////
 // reducer
 // /////////////////////
@@ -91,6 +93,8 @@ export default function(state = initialState, action) {
         isPosting: false,
         errorMessage: action.errorMessage
       });
+    case RESET_OBJECT_EDIT:
+      return Object.assign({}, initialState);
     default:
       return state;
   }
@@ -397,6 +401,12 @@ export function postObjectToEndpoint(endpoint, data) {
       .catch(err =>
         dispatch({ type: POST_OBJECT_FAILURE, errorMessage: err.response.data })
       );
+  };
+}
+
+export function resetObjectEdit() {
+  return dispatch => {
+    dispatch({ type: RESET_OBJECT_EDIT });
   };
 }
 

@@ -34,6 +34,12 @@ class CompanyList extends Component {
                 <pre>
                   {JSON.stringify(object, null, 2)}
                 </pre>
+                <Link
+                  className="btn btn-info"
+                  to={"/admin/firmy/" + object.companyID}
+                >
+                  Detail firmy
+                </Link>
               </div>
             </div>
           )}
