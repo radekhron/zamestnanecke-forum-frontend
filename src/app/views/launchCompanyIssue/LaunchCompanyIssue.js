@@ -33,7 +33,13 @@ class LaunchCompanyIssue extends Component {
   }
 
   render() {
-    const { objectEdit, launchCompanyIssue, objectList, history } = this.props;
+    const {
+      objectEdit,
+      launchCompanyIssue,
+      issueList,
+      history,
+      postObjectToEndpoint
+    } = this.props;
     const { isFetching, isPosting, errorMessage } = objectEdit;
 
     return (
@@ -50,6 +56,57 @@ class LaunchCompanyIssue extends Component {
         {isFetching && <LoadingBox />}
         <div className="col-md-6 col-md-offset-3">
           <div className="well">
+            <Form
+              model="formData.launchCompanyIssue"
+              onSubmit={formValues =>
+                postObjectToEndpoint("/admin/launch-companyissue", formValues)}
+              className="form-horizontal"
+            >
+              <div className="form-group">
+                <label htmlFor=".issueID" className="form-label">
+                  Navázaný požadavek:
+                </label>
+                <Control.select
+                  model=".issueID"
+                  required
+                  className="form-control"
+                  validators={{ valueMissing: val => val.length > 0 }}
+                  validateOn="blur"
+                >
+                  <option value="" disabled>
+                    Vyberte požadavek
+                  </option>
+                  {_.filter(issueList.list, {
+                    state: "Active",
+                    default: false
+                  }).map(issue =>
+                    <option value={issue._id} key={issue._id}>
+                      {issue.name}
+                    </option>
+                  )}
+                </Control.select>
+                <Errors
+                  className="has-error"
+                  component={props =>
+                    <span className="help-block">
+                      {props.children}
+                    </span>}
+                  model=".linkedIssue"
+                  messages={{
+                    valueMissing: "Tato položka je povinná"
+                  }}
+                />
+              </div>
+              {!isPosting &&
+                <div className="form-group">
+                  <button
+                    type="submit"
+                    className="btn btn-default btn-lg btn-block"
+                  >
+                    Poslat firmě požadavek
+                  </button>
+                </div>}
+            </Form>
             {JSON.stringify(launchCompanyIssue, null, 2)}
           </div>
         </div>

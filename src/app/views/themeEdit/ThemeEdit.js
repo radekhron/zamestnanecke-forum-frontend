@@ -128,7 +128,8 @@ class ThemeEdit extends Component {
                     Vyberte požadavek
                   </option>
                   {_.filter(this.props.issueList.list, {
-                    state: "Active"
+                    state: "Active",
+                    default: false
                   }).map(issue =>
                     <option value={issue._id} key={issue._id}>
                       {issue.name}
