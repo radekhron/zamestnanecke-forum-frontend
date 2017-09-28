@@ -10,6 +10,7 @@ import LoadingBox from "./loadingBox/LoadingBox";
 import ObjectState from "./objectState/ObjectState";
 import ObjectCreatedDate from "./objectCreatedDate/ObjectCreatedDate";
 import VotingPreparationThemeBoxes from "./votingPreparationThemeBoxes/VotingPreparationThemeBoxes";
+import AnonymousInvitation from "./anonymousInvitation/AnonymousInvitation";
 
 export {
   Jumbotron,
@@ -21,5 +22,6 @@ export {
   LoadingBox,
   ObjectState,
   ObjectCreatedDate,
-  VotingPreparationThemeBoxes
+  VotingPreparationThemeBoxes,
+  AnonymousInvitation
 };

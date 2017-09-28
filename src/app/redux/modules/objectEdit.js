@@ -410,6 +410,41 @@ export function resetObjectEdit() {
   };
 }
 
+export function anonymousInvite(email, companyID) {
+  return dispatch => {
+    dispatch({ type: POST_OBJECT_REQUEST });
+    const url =
+      appConfig.api.serverUrl + appConfig.apiVersion + "/anonymous-invitation";
+    const payload = {
+      email: email,
+      companyID: companyID
+    };
+    axios({
+      method: "post",
+      url: url,
+      data: payload,
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("jwt")
+          ? localStorage.getItem("jwt")
+          : null
+      }
+    })
+      .then(data => {
+        dispatch({ type: POST_OBJECT_SUCCESS, object: data.data });
+        setTimeout(() => {
+          dispatch({ type: RESET_OBJECT_EDIT });
+        }, 4000);
+      })
+      .catch(err =>
+        dispatch({
+          type: POST_OBJECT_FAILURE,
+          errorMessage: _.get(err, "response.data") || err
+        })
+      );
+  };
+}
+
 // export function formChangeAction(value, target) {
 //   return dispatch => {
 //     dispatch({type: CHANGE_FORM_VALUE, newValue: value, target: target});

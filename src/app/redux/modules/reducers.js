@@ -14,6 +14,7 @@ import objectList from "./objectList";
 import issueEdit from "./issueEdit";
 import objectEdit from "./objectEdit";
 import voting from "./voting";
+import anonymousInvite from "./anonymousInvite";
 import { initialFormState } from "./formInitialValues";
 
 export const reducers = {
@@ -27,7 +28,8 @@ export const reducers = {
   userDetail,
   objectList,
   issueEdit,
-  objectEdit
+  objectEdit,
+  anonymousInvite
 };
 
 export default combineReducers({

@@ -2,21 +2,26 @@
 
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ErrorBox, LoadingBox } from "../../components";
+import { ErrorBox, LoadingBox, AnonymousInvitation } from "../../components";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
   componentDidMount() {}
 
   render() {
-    const { login } = this.props;
+    const { login, register, anonymousInvite } = this.props;
     const { isFetching, isAuthenticated, errorMessage } = login;
     return (
       <div className="col-md-12">
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
+        {register.employeeRegistered && (
+          <div className="col-md-6 col-md-offset-3 alert alert-success">
+            Vaše registrace byla úspěšně dokončena
+          </div>
+        )}
         <div className="col-md-6 col-md-offset-3">
-          {!isAuthenticated &&
+          {!isAuthenticated && (
             <div className="well">
               <form className="form-horizontal">
                 <fieldset>
@@ -40,25 +45,32 @@ class Login extends Component {
                   </button>
                 </fieldset>
               </form>
-            </div>}
-          {isAuthenticated &&
+            </div>
+          )}
+
+          {isAuthenticated && (
             <div className="alert alert-success">
               Jste přihlášení. Můžete pokračovat na hlavní stránku.
-            </div>}
-          {isFetching &&
+            </div>
+          )}
+          {isFetching && (
             <div>
               <h3>Přihlašuji</h3>
               <div className="progress progress-striped active">
                 <div className="progress-bar" style={{ width: "45%" }} />
               </div>
-            </div>}
-
-          <div>
-            <pre>
-              {JSON.stringify(this.props, null, 2)}
-            </pre>
-          </div>
+            </div>
+          )}
         </div>
+        {register.employeeRegistered && (
+          <AnonymousInvitation
+            onInviteClick={(email, companyID) => {
+              anonymousInvite(email, companyID);
+            }}
+            companyID={register.companyID}
+            communicationState={this.props.anonymousInviteState}
+          />
+        )}
       </div>
     );
   }

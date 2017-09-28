@@ -1,22 +1,24 @@
 // @flow weak
 
-import { connect }            from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Login }               from '../../views';
-import * as loginActions      from '../../redux/modules/login';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Login } from "../../views";
+import * as loginActions from "../../redux/modules/login";
+import * as anonymousInviteActions from "../../redux/modules/anonymousInvite";
 
-
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    login: state.login
+    login: state.login,
+    register: state.register,
+    anonymousInviteState: state.anonymousInvite
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      postEmployeeLogin: loginActions.postEmployeeLogin
+      postEmployeeLogin: loginActions.postEmployeeLogin,
+      anonymousInvite: anonymousInviteActions.anonymousInvite
     },
     dispatch
   );
@@ -32,7 +34,4 @@ const mapDispatchToProps = (dispatch) => {
 //   };
 // };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

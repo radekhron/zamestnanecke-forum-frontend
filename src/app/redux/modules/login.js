@@ -21,6 +21,7 @@ const initialState = {
   isAuthenticated: decodedJwt ? true : false,
   role: decodedJwt ? decodedJwt.permissions : null,
   userID: decodedJwt ? decodedJwt.sub : null,
+  companyID: decodedJwt ? decodedJwt.companyID : null,
   errorMessage: null
 };
 
@@ -40,6 +41,7 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         role: action.role,
         userID: action.userID,
+        companyID: action.companyID,
         errorMessage: null
       });
     case POST_EMPLOYEE_LOGIN_FAILURE:
@@ -83,7 +85,8 @@ export function postEmployeeLogin(loginData) {
         dispatch({
           type: POST_EMPLOYEE_LOGIN_SUCCESS,
           role: decodedJwt.permissions,
-          userID: decodedJwt.sub
+          userID: decodedJwt.sub,
+          companyID: decodedJwt.companyID
         });
       })
       .catch(err =>

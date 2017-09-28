@@ -6,7 +6,8 @@ import {
   ErrorBox,
   LoadingBox,
   ObjectState,
-  ObjectCreatedDate
+  ObjectCreatedDate,
+  AnonymousInvitation
 } from "../../components";
 import { appConfig } from "../../config";
 import { Link } from "react-router-dom";
@@ -49,7 +50,13 @@ class EmployeeHome extends Component {
   };
 
   render() {
-    const { homepage, votedFor, votableThemes } = this.props;
+    const {
+      homepage,
+      votedFor,
+      votableThemes,
+      user,
+      anonymousInvite
+    } = this.props;
     const { isFetching, isPosting, object, errorMessage } = homepage;
     const uploadOptions = {
       server: appConfig.api.serverUrl,
@@ -61,19 +68,21 @@ class EmployeeHome extends Component {
       <div className="col-md-12">
         {errorMessage && <ErrorBox errorMessage={errorMessage} />}
         {isFetching && <LoadingBox />}
-        {_.get(object, "homepageType") === "New Employee" &&
+        {_.get(object, "homepageType") === "New Employee" && (
           <div className="col-md-6 col-md-offset-3">
             <div className="well clearfix">
               <div className="col-md-4 text-center">
                 Potvrzený e-mail<br />
-                {_.get(object, "emailConfirmed") === true &&
-                  <span className="label label-success">Ano</span>}
-                {_.get(object, "emailConfirmed") === false &&
-                  <span className="label label-danger">Ne</span>}
+                {_.get(object, "emailConfirmed") === true && (
+                  <span className="label label-success">Ano</span>
+                )}
+                {_.get(object, "emailConfirmed") === false && (
+                  <span className="label label-danger">Ne</span>
+                )}
               </div>
               <div className="col-md-4 text-center">
                 Nahrané potvrzení o zaměstnání<br />
-                {_.get(object, "employmentConfirmationUploaded") === true &&
+                {_.get(object, "employmentConfirmationUploaded") === true && (
                   <div>
                     <span className="label label-success">Ano</span>
                     <a
@@ -92,8 +101,9 @@ class EmployeeHome extends Component {
                     >
                       Smazat
                     </button>
-                  </div>}
-                {_.get(object, "employmentConfirmationUploaded") === false &&
+                  </div>
+                )}
+                {_.get(object, "employmentConfirmationUploaded") === false && (
                   <div>
                     <span className="label label-danger">Ne</span>
                     <DropzoneS3Uploader
@@ -119,24 +129,23 @@ class EmployeeHome extends Component {
                     >
                       <span>Nahrát soubor</span>
                     </DropzoneS3Uploader>
-                  </div>}
+                  </div>
+                )}
               </div>
               <div className="col-md-4 text-center">
                 ZamForum ověřilo zaměstnání<br />
-                {_.get(object, "employmentConfirmed") === true &&
-                  <span className="label label-success">Ano</span>}
-                {_.get(object, "employmentConfirmed") === false &&
-                  <span className="label label-danger">Ne</span>}
+                {_.get(object, "employmentConfirmed") === true && (
+                  <span className="label label-success">Ano</span>
+                )}
+                {_.get(object, "employmentConfirmed") === false && (
+                  <span className="label label-danger">Ne</span>
+                )}
               </div>
               <div className="col-md-12">
-                <pre>
-                  {JSON.stringify(uploadOptions, null, 2)}
-                </pre>
+                <pre>{JSON.stringify(uploadOptions, null, 2)}</pre>
               </div>
               <div className="col-md-12">
-                <pre>
-                  {JSON.stringify(object, null, 2)}
-                </pre>
+                <pre>{JSON.stringify(object, null, 2)}</pre>
               </div>
               <div className="col-md-12">
                 <p>
@@ -153,9 +162,10 @@ class EmployeeHome extends Component {
                 </ul>
               </div>
             </div>
-          </div>}
+          </div>
+        )}
 
-        {_.get(object, "homepageType") === "Waiting company" &&
+        {_.get(object, "homepageType") === "Waiting company" && (
           <div className="col-md-6 col-md-offset-3 alert alert-info">
             <h3>
               Ve vaší firmě {object.company.name} je už potvrzeno celkem{" "}
@@ -167,9 +177,10 @@ class EmployeeHome extends Component {
                 style={{ width: "{object.company.approvedEmployees / 3}%" }}
               />
             </div>
-          </div>}
+          </div>
+        )}
 
-        {_.get(object, "homepageType") === "Active company" &&
+        {_.get(object, "homepageType") === "Active company" && (
           <div className="col-md-12">
             <h3>Hlasovat můžete pro následující témata:</h3>
             <h4>
@@ -180,20 +191,14 @@ class EmployeeHome extends Component {
               Zbývající negativní hlasy{" "}
               {1 - _.filter(votedFor, ["type", "negative"]).length}
             </h4>
-            {_.chunk(votableThemes, 3).map((row, index) =>
+            {_.chunk(votableThemes, 3).map((row, index) => (
               <div className="row" key={index}>
-                {row.map(theme =>
+                {row.map(theme => (
                   <div className="col-md-4" key={theme._id}>
                     <div className="well">
-                      <h3>
-                        {theme.name}
-                      </h3>
-                      <p>
-                        {theme.description}
-                      </p>
-                      <p>
-                        Celková bilance hlasů: {theme.votes.total}
-                      </p>
+                      <h3>{theme.name}</h3>
+                      <p>{theme.description}</p>
+                      <p>Celková bilance hlasů: {theme.votes.total}</p>
                       <button
                         className={
                           "btn btn-default" +
@@ -230,32 +235,29 @@ class EmployeeHome extends Component {
                       </button>
                     </div>
                   </div>
-                )}
+                ))}
               </div>
-            )}
+            ))}
             <h3>Požadavky na zaměstnavatele</h3>
-            {_.chunk(_.get(object, "issues"), 3).map((row, index) =>
+            {_.chunk(_.get(object, "issues"), 3).map((row, index) => (
               <div className="row" key={index}>
-                {row.map(issue =>
+                {row.map(issue => (
                   <div className="col-md-4" key={issue._id}>
                     <div className="well">
-                      <h3>
-                        {issue.name}
-                      </h3>
-                      <p>
-                        {issue.description}
-                      </p>
+                      <h3>{issue.name}</h3>
+                      <p>{issue.description}</p>
                       <p>
                         <strong>Požadavek zaslán zaměstnavateli:</strong>
                         <br />
                         <ObjectCreatedDate mongodbID={issue._id} />
                       </p>
-                      {issue.lastEditDate &&
+                      {issue.lastEditDate && (
                         <p>
                           <strong>Poslední aktivita:</strong>
                           <br />
                           {moment(issue.lastEditDate).format("D. M. YYYY")}
-                        </p>}
+                        </p>
+                      )}
                       <p>
                         <strong>Stav:</strong>
                         <br />
@@ -277,17 +279,18 @@ class EmployeeHome extends Component {
                           }}
                         />
                       </p>
-                      {issue.officialResponse &&
+                      {issue.officialResponse && (
                         <p>
                           <strong>Vyjádření zaměstnavatele:</strong>
                           <br />
                           {issue.officialResponse}
-                        </p>}
+                        </p>
+                      )}
                       <p>
                         <strong>Přílohy:</strong>
                       </p>
                       <ul>
-                        {issue.attachmentsToBePublished.map(attachment =>
+                        {issue.attachmentsToBePublished.map(attachment => (
                           <li key={attachment}>
                             <a
                               href={
@@ -299,17 +302,24 @@ class EmployeeHome extends Component {
                               {_.last(_.split(attachment, "/"))}
                             </a>
                           </li>
-                        )}
+                        ))}
                       </ul>
-                      <pre>
-                        {JSON.stringify(issue, null, 2)}
-                      </pre>
+                      <pre>{JSON.stringify(issue, null, 2)}</pre>
                     </div>
                   </div>
-                )}
+                ))}
               </div>
-            )}
-          </div>}
+            ))}
+          </div>
+        )}
+
+        <AnonymousInvitation
+          onInviteClick={(email, companyID) => {
+            anonymousInvite(email, companyID);
+          }}
+          companyID={user.companyID}
+          communicationState={this.props.anonymousInviteState}
+        />
       </div>
     );
   }

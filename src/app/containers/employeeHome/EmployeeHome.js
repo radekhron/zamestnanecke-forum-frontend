@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { EmployeeHome } from "../../views";
 import * as objectEditActions from "../../redux/modules/objectEdit";
 import * as votingActions from "../../redux/modules/voting";
+import * as anonymousInviteActions from "../../redux/modules/anonymousInvite";
 import _ from "lodash";
 
 const mapStateToProps = state => {
@@ -15,7 +16,9 @@ const mapStateToProps = state => {
       "Voting in progress"
     ]),
     votedFor: _.get(state.objectEdit, "object.votedFor"),
-    voteStatus: state.voting
+    voteStatus: state.voting,
+    anonymousInviteState: state.anonymousInvite,
+    user: state.login
   };
 };
 
@@ -27,7 +30,8 @@ const mapDispatchToProps = dispatch => {
         objectEditActions.postEmploymentConfirmationUrl,
       deleteEmploymentConfirmation:
         objectEditActions.deleteEmploymentConfirmation,
-      fetchVoteStatus: votingActions.fetchVoteStatus
+      fetchVoteStatus: votingActions.fetchVoteStatus,
+      anonymousInvite: anonymousInviteActions.anonymousInvite
     },
     dispatch
   );

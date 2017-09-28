@@ -20,7 +20,8 @@ const initialState = {
   isFetching: false,
   isPosting: false,
   employeeRegistered: false,
-  errorMessage: ""
+  errorMessage: "",
+  companyID: ""
 };
 
 export default function(state = initialState, action) {
@@ -52,13 +53,15 @@ export default function(state = initialState, action) {
         isFetching: false,
         isPosting: true,
         employeeRegistered: false,
-        errorMessage: ""
+        errorMessage: "",
+        companyID: ""
       });
     case POST_EMPLOYEE_REGISTRATION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
         isPosting: false,
         employeeRegistered: true,
+        companyID: action.companyID,
         errorMessage: ""
       });
     default:
@@ -115,7 +118,10 @@ export function postEmployeeRegistration(employee, history) {
       }
     })
       .then(data => {
-        dispatch({ type: POST_EMPLOYEE_REGISTRATION_SUCCESS });
+        dispatch({
+          type: POST_EMPLOYEE_REGISTRATION_SUCCESS,
+          companyID: employee.company.companyID
+        });
         history.push("/prihlasit");
       })
       .catch(err =>
